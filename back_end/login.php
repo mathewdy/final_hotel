@@ -1,6 +1,6 @@
 <?php
 include('../connection.php');
-
+session_start();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -32,11 +32,16 @@ if(isset($_POST['login'])){
 
     if($result){
         if(mysqli_num_rows($result) == 1){
+            //getting array sa database
             $result_fetch = mysqli_fetch_assoc($result);
-
-            if($result_fetch['email_status'] == 1){
-                if($_POST['account_id'] == $result_fetch['account_id']){
-                    $_SESSION['login'] = true;
+            //call out ko yung 'email_status' sa database
+            //kapag == 1 makakapag log in, . 
+            // validation ng password syempre SHAHSHAHS 
+            if($result_fetch['email_status'] == 1)
+            {
+                if(($_POST['account_id'] == $result_fetch['account_id'])){
+                    // makakapag login kapag tama
+                    $_SESSION['logged_in'] = true;
                     $_SESSION['email'] = $result_fetch['email'];
                     $_SESSION['id'] = $result_fetch['id'];
                     $_SESSION['first_name'] = $result_fetch['first_name'];
@@ -46,20 +51,22 @@ if(isset($_POST['login'])){
                     header("Location: home.php");
                 }else{
                     //password incorrect
-                    echo "<script>alert('Account Id Incorrect')</script>";
-                    echo "<script>window.location.href= 'login.php' </script>";
+                    echo "<script>alert('Password Incorrect')</script>";
+                    echo "<script>window.location.href= 'index.php' </script>";
+                   
                 }
             }else{  //di pa verified account
                 echo "<script>alert('Please verify your email address')</script>";
-                echo "<script>window.location.href= 'login.php' </script>";
+                echo "<script>window.location.href= 'index.php' </script>";
                 
             }
             
         }else{//walang account
             echo "<script>alert('Account not found.')</script>";
-            echo "<script>window.location.href= 'login.php' </script>";
+            echo "<script>window.location.href= 'index.php' </script>";
         }
     }
+
 }
 
 ?>

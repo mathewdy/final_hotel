@@ -2,6 +2,7 @@
 
 include('../connection.php');
 session_start();
+echo $_SESSION['email'];
 
 ?>
 <!DOCTYPE html>
@@ -13,11 +14,17 @@ session_start();
     <title>Document</title>
 </head>
 <body>
-    <a href="">Home</a>
-    <a href="all.php">Rooms</a>
+    <a href="#">Home</a>
+    <a href="#">Rooms</a>
     
     <a href="economy.php">Economy</a>
-    <a href="">Executive</a>
+    <a href="executive.php">Executive</a>
+    <a href="deluxe.php">Deluxe</a>
+
+    <!---para sa history Transactions ng user--->
+    <a href="history_transactions.php">History Transactions</a>
+
+    <a href="profile.php">Settings</a>
 
     <form action="logout.php" method="POST">
         <input type="submit" name="logout" value="Log Out">
