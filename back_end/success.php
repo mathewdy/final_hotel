@@ -112,11 +112,6 @@ $error = NULL;
 
             $change_room_status = "reserved";
 
-            $check_room_status = "SELECT * FROM rooms WHERE id = '$room_id' and status = 'reserved' or status = 'occupied'";
-                $query_status = mysqli_query($conn, $check_room_status);
-                if(mysqli_num_rows($query_status) > 0){
-                  header("location:home.php");
-                }else{
             $query_user = "SELECT * FROM users WHERE id = '$id' AND email = '$email'";
             $q_user = mysqli_query($conn, $query_user);
             $rows = mysqli_fetch_array($q_user);
@@ -236,7 +231,6 @@ $error = NULL;
                 }
             }
         }
-    }
     ?>
 
 </body>
