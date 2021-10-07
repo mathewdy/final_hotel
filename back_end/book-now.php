@@ -59,7 +59,7 @@ if(empty($_SESSION['email'])){
     
     <?php
 
-        $query_economy = "SELECT rooms.id , rooms.room_number,rooms.room_type_id, rooms.status, room_types.name_of_room, room_types.image , room_types.price,room_types.package_id, packages.name_package,packages.description
+        $query_economy = "SELECT rooms.id , rooms.room_number,rooms.room_type_id, room_types.name_of_room, room_types.image , room_types.price,room_types.package_id, packages.name_package,packages.description
         FROM rooms
         LEFT JOIN room_types ON rooms.room_type_id = room_types.id
         LEFT JOIN packages ON room_types.package_id = packages.id 
@@ -171,11 +171,6 @@ if(empty($_SESSION['email'])){
                                                     <p class="lead p-0 m-0">Package: </p>
                                                     <p class="lead p-0 px-sm-1 m-0"> <?php echo $row ['name_package']?></p>
                                                     <input type="hidden" name="name_package" value="<?php echo $row ['name_package']?>">
-                                                </span>
-                                                <span class="d-flex">
-                                                    <p class="lead p-0 m-0">Status: </p>
-                                                    <p class="lead p-0 px-sm-1 m-0"> <?php echo $row ['status']?></p>
-                                                    <input type="hidden" name="status" value="<?php echo $row ['status']?>">
                                                 </span>
                                             </div>
                                         </div>

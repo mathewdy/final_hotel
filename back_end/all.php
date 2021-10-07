@@ -57,7 +57,7 @@ if(empty($_SESSION['email'])){
 </div>
     <?php
     //economy
-    $query_executive = "SELECT rooms.id , rooms.room_number,rooms.room_type_id, rooms.status, room_types.id, room_types.image,
+    $query_executive = "SELECT rooms.id , rooms.room_number,rooms.room_type_id, room_types.id, room_types.image,
             room_types.name_of_room, room_types.price,room_types.package_id, packages.id,packages.name_package,packages.description
             FROM room_types
             LEFT JOIN rooms ON rooms.room_type_id = room_types.id
@@ -80,7 +80,6 @@ if(empty($_SESSION['email'])){
                         <p class="p-0 m-0">Price : <?php echo $row ['price']?></p>
                         <p class="p-0 m-0">Package : <?php echo $row ['name_package']?></p>
                         <p class="p-0 m-0">Description : <?php echo $row ['description']?></p>
-                        <p class="p-0 m-0">Status : <?php echo $row ['status']?></p>
 
                         <a class="btn btn-dark w-100" href="book-now.php?id=<?php echo $row ['room_number']?>">View</a>
                     </div>

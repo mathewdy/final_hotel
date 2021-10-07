@@ -25,7 +25,6 @@ if(isset($_POST['review_details'])){
     $number_of_guests = $_POST['number_of_guest'];
     $name_of_room = $_POST['name_of_room'];
     $room_number = $_POST['room_number'];
-    $status = $_POST['status'];
     $price = $_POST['price'];
     $description = $_POST['description'];
     $name_package = $_POST['name_package'];
