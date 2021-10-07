@@ -44,7 +44,6 @@ if(isset($_POST['proof_of_transaction'])){
     <h3>Bank Partners</h3>
     <form action="#" method=POST enctype="multipart/form-data">
 
-       
         <label for="">Select Bank</label>
         <!---di pa to tapos--->
         <!---yung deposit slip dapat to -->
