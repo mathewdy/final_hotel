@@ -150,7 +150,7 @@ link ito!
         return actions.order.capture().then(function(details){
             console.log(details)
             
-            window.location.replace("http://localhost/final_hotel/back_end/sucess.php?success&id=<?php echo $id?>&email=<?php echo $email?>&room_id=<?php echo $room_id?>&in=<?php echo $check_in?>&out=<?php echo $check_out?>&guest=<?php echo $number_of_guest?>&originator=<?php echo $mobile_number?>&recipients=<?php echo $mobile_number?>")
+            window.location.replace("http://localhost/final_hotel/back_end/success.php?success&id=<?php echo $id?>&email=<?php echo $email?>&room_id=<?php echo $room_id?>&in=<?php echo $check_in?>&out=<?php echo $check_out?>&guest=<?php echo $number_of_guest?>&originator=<?php echo $mobile_number?>&recipients=<?php echo $mobile_number?>")
 
         })
     }
