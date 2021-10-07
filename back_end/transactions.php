@@ -17,7 +17,7 @@ $id = $_SESSION['id'];
 </head>
 <body>
     <a href="home.php">Back</a>
-    <h2>Your History Transactions</h2>
+    <h2>Your Booking History</h2>
     <?php
     
     //results ng history
