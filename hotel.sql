@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 07, 2021 at 07:17 PM
+-- Generation Time: Oct 07, 2021 at 09:39 PM
 -- Server version: 10.4.19-MariaDB
 -- PHP Version: 8.0.6
 
@@ -62,10 +62,7 @@ CREATE TABLE `book_info` (
 --
 
 INSERT INTO `book_info` (`id`, `room_id`, `users_id`, `guest`, `check_in`, `check_out`, `added_on`, `status`) VALUES
-(1, 2, 1, '1', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '2021-10-08 12:52:40', 'reserved'),
-(2, 2, 1, '1', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '2021-10-08 12:57:07', 'reserved'),
-(3, 2, 1, '1', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '2021-10-08 12:57:57', 'reserved'),
-(4, 2, 1, '1', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '2021-10-08 12:59:24', 'reserved');
+(1, 7, 1, '1', '2021-10-28 03:04:00', '2021-10-30 03:04:00', '2021-10-08 02:05:10', 'reserved');
 
 -- --------------------------------------------------------
 
@@ -152,7 +149,8 @@ CREATE TABLE `proof_of_transaction` (
 --
 
 INSERT INTO `proof_of_transaction` (`id`, `user_id`, `image`, `bank`, `added_on`, `room_id`, `status`) VALUES
-(1, 1, 'Capture.PNG', 'BPI', '2021-10-07 17:35:41', 10, 'pending');
+(1, 1, 'Capture.PNG', 'BPI', '2021-10-07 17:35:41', 10, 'pending'),
+(2, 1, 'Capture.PNG', 'BDO', '2021-10-07 20:06:05', 2, 'confirmed');
 
 -- --------------------------------------------------------
 
@@ -163,45 +161,44 @@ INSERT INTO `proof_of_transaction` (`id`, `user_id`, `image`, `bank`, `added_on`
 CREATE TABLE `rooms` (
   `id` int(11) NOT NULL,
   `room_number` varchar(20) NOT NULL,
-  `room_type_id` int(11) NOT NULL,
-  `status` varchar(30) NOT NULL
+  `room_type_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `rooms`
 --
 
-INSERT INTO `rooms` (`id`, `room_number`, `room_type_id`, `status`) VALUES
-(1, '101', 1, 'reserved'),
-(2, '102', 3, 'reserved'),
-(3, '103', 3, 'reserved'),
-(4, '104', 2, 'available'),
-(5, '105', 1, 'reserved'),
-(6, '106', 1, 'available'),
-(7, '107', 2, 'available'),
-(8, '108', 2, 'available'),
-(9, '109', 3, 'available'),
-(10, '110', 1, 'available'),
-(11, '201', 2, 'available'),
-(12, '202', 2, 'available'),
-(13, '203', 1, 'available'),
-(14, '204', 3, 'available'),
-(15, '205', 3, 'available'),
-(16, '206', 2, 'available'),
-(17, '207', 1, 'available'),
-(18, '208', 2, 'available'),
-(19, '209', 1, 'available'),
-(20, '210', 3, 'available'),
-(21, '301', 2, 'available'),
-(22, '302', 1, 'available'),
-(23, '303', 3, 'available'),
-(24, '304', 2, 'available'),
-(25, '305', 3, 'reserved'),
-(26, '306', 2, 'available'),
-(27, '307', 1, 'available'),
-(28, '308', 3, 'available'),
-(29, '309', 1, 'available'),
-(30, '310', 3, 'available');
+INSERT INTO `rooms` (`id`, `room_number`, `room_type_id`) VALUES
+(1, '101', 1),
+(2, '102', 3),
+(3, '103', 3),
+(4, '104', 2),
+(5, '105', 1),
+(6, '106', 1),
+(7, '107', 2),
+(8, '108', 2),
+(9, '109', 3),
+(10, '110', 1),
+(11, '201', 2),
+(12, '202', 2),
+(13, '203', 1),
+(14, '204', 3),
+(15, '205', 3),
+(16, '206', 2),
+(17, '207', 1),
+(18, '208', 2),
+(19, '209', 1),
+(20, '210', 3),
+(21, '301', 2),
+(22, '302', 1),
+(23, '303', 3),
+(24, '304', 2),
+(25, '305', 3),
+(26, '306', 2),
+(27, '307', 1),
+(28, '308', 3),
+(29, '309', 1),
+(30, '310', 3);
 
 -- --------------------------------------------------------
 
@@ -330,7 +327,7 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `book_info`
 --
 ALTER TABLE `book_info`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `id_info`
@@ -354,7 +351,7 @@ ALTER TABLE `packages`
 -- AUTO_INCREMENT for table `proof_of_transaction`
 --
 ALTER TABLE `proof_of_transaction`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `rooms`
