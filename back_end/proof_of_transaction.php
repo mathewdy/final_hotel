@@ -41,11 +41,10 @@ if(isset($_POST['proof_of_transaction'])){
 </head>
 <body>
     <a href="home.php">Cancel</a>
-    <h3>Send a Proof of transaction</h3>
+    <h3>Bank Partners</h3>
     <form action="#" method=POST enctype="multipart/form-data">
 
-        <label for="">Upload Image</label>
-        <input type="file" name="image_transaction"> <br>
+       
         <label for="">Select Bank</label>
         <!---di pa to tapos--->
         <!---yung deposit slip dapat to -->
@@ -62,6 +61,9 @@ if(isset($_POST['proof_of_transaction'])){
             <option value="Union Bank">Union Bank of the Philippines</option>
             <option value="Rizal Bank">Rizal Commercial Banking and Corporation</option>
         </select>
+
+        <label for="">Upload Image</label>
+        <input type="file" name="image_transaction"> <br>
 
         <input type="hidden" name="id" value="<?php echo $id?>">
         <input type="hidden" name="account_id"  value="<?php echo $account_id?>" >
