@@ -13,6 +13,7 @@ include('../connection.php');
 <body>
 
 <a href="home.php">Back</a>
+<h2>Edit Profile</h2>
     <?php
 
     $query_user = "SELECT * FROM users WHERE id='$_SESSION[id]'";

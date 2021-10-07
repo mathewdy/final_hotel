@@ -49,7 +49,7 @@ if(isset($_POST['proof_of_transaction'])){
         <label for="">Select Bank</label>
         <!---di pa to tapos--->
         <!---yung deposit slip dapat to -->
-        <select name="" id="">
+        <select name="bank" id="">
             <option value="">-Select-</option>
             <option value="BDO">BDO Unibank Inc.</option>
             <option value="Metro bank">Metropolitan Bank and Trust Company</option>
@@ -114,10 +114,15 @@ if(isset($_POST['payment'])){
     $number_of_guests = $_POST['number_of_guests'];
     $name_of_room = $_POST['name_of_room'];
     $room_number = $_POST['room_number'];
+    //room status ito
     $status = $_POST['status'];
     $price = $_POST['price'];
     $description = $_POST['description'];
     $name_package = $_POST['name_package'];
+
+    $bank = $_POST['bank'];
+    //transaction status
+    $transaction_status = "pending";
 
     $image_transaction = $_FILES['image_transaction']['name'];
     $allowed_extension = array('gif' , 'png' , 'jpeg', 'jpg' , 'PNG' , 'JPEG' , 'JPG' , 'GIF');
@@ -126,8 +131,8 @@ if(isset($_POST['payment'])){
 
     $added_on = date("Y-m-d H:i:s");
 
-    $query_insert = "INSERT INTO proof_of_transaction (user_id,image,added_on)
-    VALUES ('$id' , '$image_transaction' , '$added_on')";    
+    $query_insert = "INSERT INTO proof_of_transaction (user_id,image,bank,added_on,room_id,status)
+    VALUES ('$id' , '$image_transaction','$bank', '$added_on','$room_id', '$transaction_status')";    
     $run_insert = mysqli_query($conn,$query_insert);
     move_uploaded_file($_FILES["image_transaction"]["tmp_name"], "receipt/" . $_FILES["image_transaction"] ["name"]);
 

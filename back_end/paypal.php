@@ -1,10 +1,13 @@
 <?php
 
+
+//MAY ERROR SA PAYPAL
+
 include('../connection.php');
 session_start();
 
 if(empty($_SESSION['email'])){
-    echo "<script> window.location.href='index.php'</script>";
+    echo "<script> window.location.href='login.php'</script>";
 }
 
 if(isset($_POST['paypal'])){
@@ -147,7 +150,7 @@ link ito!
         return actions.order.capture().then(function(details){
             console.log(details)
             
-            window.location.replace("http://localhost/final_hotel/back_end/sucess.php")
+            window.location.replace("http://localhost/final_hotel/back_end/sucess.php?success&id=<?php echo $id?>&email=<?php echo $email?>&room_id=<?php echo $room_id?>&in=<?php echo $check_in?>&out=<?php echo $check_out?>&guest=<?php echo $number_of_guest?>&originator=<?php echo $mobile_number?>&recipients=<?php echo $mobile_number?>")
 
         })
     }
