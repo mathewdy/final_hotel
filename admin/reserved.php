@@ -14,10 +14,9 @@ session_start();
 <body>
    <a href="logout.php">Logout</a> 
    <br>
-   <a href="home.php">Pending Request</a>
-   <a href="available.php">Available Rooms</a>
+   <a href="home.php">Clients</a>
+   <a href="pending.php">Pending Requests</a>
    <a href="reserved.php">Reserved Rooms</a>
-   <a href="occupied.php">Occupied Rooms</a>
 
    <?php 
     $sql = "SELECT rooms.room_number, rooms.status, room_types.name_of_room, book_info.room_id,
