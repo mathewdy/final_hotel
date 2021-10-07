@@ -16,8 +16,8 @@ if(isset($_POST['review_details'])){
     $mobile_number = $_POST['mobile_number'];
 
     $room_id = $_POST['room_id'];
-    $check_in = date('y-m-d', strtotime($_POST['check_in']));
-    $check_out = date('y-m-d' , strtotime($_POST['check_out']));
+    $check_in = date('Y-m-d', strtotime($_POST['check_in']));
+    $check_out = date('Y-m-d' , strtotime($_POST['check_out']));
 
     $time_check_in = $_POST['time_check_in'];
     $time_check_out = $_POST['time_check_out'];
