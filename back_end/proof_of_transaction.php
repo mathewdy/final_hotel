@@ -1,6 +1,6 @@
 <?php
 
-//di pa to tapos
+//di pa to tapos , paki ayos ung oras ng check_in at check_out
 session_start();
 include('../connection.php');
 
@@ -116,7 +116,7 @@ if(isset($_POST['payment'])){
     $name_of_room = $_POST['name_of_room'];
     $room_number = $_POST['room_number'];
     //room status ito
-    $status = $_POST['status'];
+    $status = "pending";
     $price = $_POST['price'];
     $description = $_POST['description'];
     $name_package = $_POST['name_package'];
@@ -125,6 +125,8 @@ if(isset($_POST['payment'])){
     //transaction status
     $transaction_status = "pending";
 
+    $payment_method = "bank";
+
     $image_transaction = $_FILES['image_transaction']['name'];
     $allowed_extension = array('gif' , 'png' , 'jpeg', 'jpg' , 'PNG' , 'JPEG' , 'JPG' , 'GIF');
     $filename = $_FILES ['image_transaction']['name'];
@@ -132,8 +134,8 @@ if(isset($_POST['payment'])){
 
     $added_on = date("Y-m-d H:i:s");
 
-    $query_insert = "INSERT INTO proof_of_transaction (user_id,image,bank,added_on,room_id,status)
-    VALUES ('$id' , '$image_transaction','$bank', '$added_on','$room_id', '$transaction_status')";    
+    $query_insert = "INSERT INTO book_info (room_id,users_id,guest,check_in,check_out,added_on,status,payment_method,image,bank)
+    VALUES ('$room_id','$id' , '$number_of_guests','$check_in','$check_out', '$added_on','$status', '$payment_method','$image_transaction','$bank')";    
     $run_insert = mysqli_query($conn,$query_insert);
     move_uploaded_file($_FILES["image_transaction"]["tmp_name"], "receipt/" . $_FILES["image_transaction"] ["name"]);
 

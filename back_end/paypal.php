@@ -3,6 +3,8 @@
 
 //MAY ERROR SA PAYPAL
 
+//Paki ayos yung pag insert sa DB JIDI
+
 include('../connection.php');
 session_start();
 
