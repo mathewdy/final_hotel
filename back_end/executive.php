@@ -53,11 +53,7 @@ if(empty($_SESSION['email'])){
         <li class="breadcrumb-item active" aria-current="page">Executive Rooms</li>
         
     </ol>
-    <ol class="breadcrumb">
-        <li class="breadcrumb-item active">Available</a></li>
-        <li class="breadcrumb-item" aria-current="page"><a href="reserved-executive.php">Reserved</a></li>
-        <li class="breadcrumb-item" ><a href="occupied-executive.php">Occupied</a></li>
-    </ol>
+    
 </nav>
 </div>
     <?php
