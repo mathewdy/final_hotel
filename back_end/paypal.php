@@ -25,6 +25,7 @@ if(isset($_POST['paypal'])){
     // parse date to integer
     $chck_in = strtotime($_POST['check_in']);
     $chck_out = strtotime($_POST['check_out']);
+    //time check in & check out.
     $time_check_in = $_POST['time_check_in'];
     $time_check_out = $_POST['time_check_out'];
 

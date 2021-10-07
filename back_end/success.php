@@ -140,7 +140,7 @@ $error = NULL;
                 $sub_total = $days * $price;
                 $total = $sub_total + $tax;
                 
-                $insert_booking = "INSERT INTO room_info_table (`room_id`, `users_id`, `guest`, `check_in`, `check_out`, `added_on`) VALUES ('$room_id', '$id', '$number_of_guest', '$check_in', '$check_out' , '$date')";
+                $insert_booking = "INSERT INTO book_info (`room_id`, `users_id`, `guest`, `check_in`, `check_out`, `added_on`) VALUES ('$room_id', '$id', '$number_of_guest', '$check_in', '$check_out' , '$date')";
                 $sql_booking = mysqli_query($conn, $insert_booking);
                 if($sql_booking){
                 
@@ -222,7 +222,7 @@ $error = NULL;
                             type: "success"
                             }).then(function() {
                             // Redirect the user
-                            window.location.reload();
+                            window.location.href="home.php";
                         });</script>';
                     
                 }else{
