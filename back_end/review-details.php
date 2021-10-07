@@ -152,6 +152,13 @@ if(isset($_POST['review_details'])){
     <input type="submit" name="proof_of_transaction" value="Proof of transaction">
 </form>
 
+<?php
+
+
+
+?>
+
+
 </div>
 </body>
 </html>

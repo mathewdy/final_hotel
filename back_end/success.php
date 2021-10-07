@@ -112,6 +112,9 @@ $error = NULL;
 
             $change_room_status = "reserved";
 
+            //pending ito sa book_info
+            $book_info_status = "reserved";
+
             $query_user = "SELECT * FROM users WHERE id = '$id' AND email = '$email'";
             $q_user = mysqli_query($conn, $query_user);
             $rows = mysqli_fetch_array($q_user);
@@ -140,7 +143,8 @@ $error = NULL;
                 $sub_total = $days * $price;
                 $total = $sub_total + $tax;
                 
-                $insert_booking = "INSERT INTO book_info (`room_id`, `users_id`, `guest`, `check_in`, `check_out`, `added_on`) VALUES ('$room_id', '$id', '$number_of_guest', '$check_in', '$check_out' , '$date')";
+                $insert_booking = "INSERT INTO book_info (`room_id`, `users_id`, `guest`, `check_in`, `check_out`, `added_on`, `status`) VALUES 
+                ('$room_id', '$id', '$number_of_guest', '$check_in', '$check_out' , '$date','$book_info_status')";
                 $sql_booking = mysqli_query($conn, $insert_booking);
                 if($sql_booking){
                 

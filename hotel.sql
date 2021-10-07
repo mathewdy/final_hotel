@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 07, 2021 at 06:18 PM
+-- Generation Time: Oct 07, 2021 at 07:17 PM
 -- Server version: 10.4.19-MariaDB
 -- PHP Version: 8.0.6
 
@@ -53,17 +53,19 @@ CREATE TABLE `book_info` (
   `guest` varchar(20) NOT NULL,
   `check_in` datetime NOT NULL,
   `check_out` datetime NOT NULL,
-  `added_on` datetime NOT NULL
+  `added_on` datetime NOT NULL,
+  `status` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `book_info`
 --
 
-INSERT INTO `book_info` (`id`, `room_id`, `users_id`, `guest`, `check_in`, `check_out`, `added_on`) VALUES
-(1, 1, 1, '1', '2021-10-28 00:00:00', '2021-10-30 00:00:00', '2021-10-08 12:13:58'),
-(2, 1, 1, '1', '2021-10-28 00:00:00', '2021-10-30 00:00:00', '2021-10-08 12:14:06'),
-(3, 1, 1, '1', '2021-10-28 00:00:00', '2021-10-30 00:00:00', '2021-10-08 12:14:36');
+INSERT INTO `book_info` (`id`, `room_id`, `users_id`, `guest`, `check_in`, `check_out`, `added_on`, `status`) VALUES
+(1, 2, 1, '1', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '2021-10-08 12:52:40', 'reserved'),
+(2, 2, 1, '1', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '2021-10-08 12:57:07', 'reserved'),
+(3, 2, 1, '1', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '2021-10-08 12:57:57', 'reserved'),
+(4, 2, 1, '1', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '2021-10-08 12:59:24', 'reserved');
 
 -- --------------------------------------------------------
 
@@ -171,7 +173,7 @@ CREATE TABLE `rooms` (
 
 INSERT INTO `rooms` (`id`, `room_number`, `room_type_id`, `status`) VALUES
 (1, '101', 1, 'reserved'),
-(2, '102', 3, 'occupied'),
+(2, '102', 3, 'reserved'),
 (3, '103', 3, 'reserved'),
 (4, '104', 2, 'available'),
 (5, '105', 1, 'reserved'),
@@ -328,7 +330,7 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `book_info`
 --
 ALTER TABLE `book_info`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `id_info`

@@ -1,0 +1,46 @@
+.hotel-room {
+    font-family: var(--poppins);
+}
+
+.rooms {
+    font-family: var(--mont);
+    font-weight: bold;
+}
+
+@media screen and (max-width:575px) {
+    .rooms {
+        margin-top: 2em !important;
+    }
+}
+
+.carousel-inner img {
+    max-width: 100%;
+    max-height: 100vh;
+}
+
+@media screen and (max-width:750px) {
+    .carousel-inner>div img {
+        max-width: 100%;
+        min-height: 10em;
+    }
+}
+
+.caption {
+    display: grid;
+    font-style: var(--lobs2);
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none !important;
+    margin: 0;
+}
+
+.entertainments {
+    text-decoration: none;
+    list-style: none;
+}
+
+.entertainments li:before {
+    content: '✓ ' !important;
+}
