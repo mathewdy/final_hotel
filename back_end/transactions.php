@@ -17,8 +17,9 @@ $id = $_SESSION['id'];
 </head>
 <body>
     <a href="home.php">Back</a>
+    <h2>Your History Transactions</h2>
     <?php
-
+    
     //results ng history
 
     $query_transaction = "SELECT book_info.guest, book_info.check_in, book_info.check_out,book_info.added_on, 
@@ -42,15 +43,58 @@ $id = $_SESSION['id'];
                             <th>Number of Guest</th>
                             <th>Check In</th>
                             <th>Check Out</th>
-                            <th>Added On</th>
+                            <th>Date: Added On</th>
                         </tr>
                         <tr>
-                            <td> <?php echo $row ['id']?> </td>
+                            <td><?php echo $row ['id']. "."?> </td>
                             <td><?php echo $row ['room_number']?></td>
                             <td><?php echo $row['guest']?></td>
                             <td><?php echo $row ['check_in']?></td>
                             <td><?php echo $row ['check_out']?></td>
                             <td><?php echo $row ['added_on']?></td>
+                        </tr>
+                    </table>
+
+                <?php
+            }
+        }else{
+            echo "No transactions yet";
+        }
+    }
+
+    ?>
+
+<h2>Your Current Transactions</h2>
+
+
+    <?php
+
+    $query_pending = "SELECT proof_of_transaction.id , proof_of_transaction.image, proof_of_transaction.bank, 
+    proof_of_transaction.added_on, proof_of_transaction.status,rooms.room_number
+    FROM proof_of_transaction
+    LEFT JOIN rooms ON proof_of_transaction.room_id = rooms.id
+    WHERE user_id='$_SESSION[id]';";
+    $run_pending = mysqli_query($conn,$query_pending);
+
+    if($run_pending){
+        if(mysqli_num_rows($run_pending) > 0){
+            foreach ($run_pending as $row){
+                ?>
+
+                    <table>
+                        <tr>
+                            <th>No.</th>
+                            <th>Room</th>
+                            <th>Bank</th>
+                            <th>Date: Added On</th>
+                            <th>Status</th>
+                        </tr>
+                        <tr>
+                           <td><?php echo $row ['id']. "."?></td>
+                            <td><?php echo $row ['room_number']?>
+                            <td><?php echo $row['bank']?></td>
+                            <td><?php echo $row ['added_on']?></td>
+                            <td><?php echo $row ['status']?></td>
                         </tr>
                     </table>
 
