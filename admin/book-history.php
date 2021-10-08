@@ -23,10 +23,10 @@
 
 <?php 
     $sql = "SELECT users.id, users.account_id, rooms.room_number, book_info.image,
-    book_info.room_id, book_info.check_in, book_info.check_out, book_info.bank, book_info.status, book_info.added_on FROM book_info 
+    book_info.bank,  book_info.check_in, book_info.check_out, book_info.status, book_info.added_on FROM book_info 
     LEFT JOIN rooms ON book_info.room_id = rooms.id
     LEFT JOIN users ON book_info.users_id = users.id 
-    WHERE book_info.status = 'reserved'
+    WHERE book_info.status = 'done'
     ORDER BY book_info.added_on DESC";
     $query = mysqli_query($conn, $sql);
     if(mysqli_num_rows($query) > 0){
@@ -39,7 +39,6 @@
     <span>Check out: <?php echo $rows['check_out']?></span><br>
     <span>Status: <?php echo ucwords($rows['status'])?></span><br>
     <span>Added on: <?php echo $rows['added_on']?></span><br>
-    <a href="reserved.php?p&id=<?php echo $rows['id']?>&rid=<?php echo $rows['room_id']?>">Mark as Done</a><br>
     <?php
     }
     }else{
@@ -50,36 +49,6 @@
    ?>
 </body>
 </html>
-<?php 
-if(isset($_GET['p']) && isset($_GET['id']) && isset($_GET['rid'])){
-  $user_id = $_GET['id'];
-  $room_id = $_GET['rid'];
-  $status = "done";
-  $update_status = "UPDATE book_info SET `status` = '$status' WHERE users_id = '$user_id' AND room_id = '$room_id'";
-  $query_change = mysqli_query($conn, $update_status);
-  if($query_change){
-    
-    echo '<script>swal({
-      title: "Update Success!",
-      text: "Status has been change!",
-      icon: "success",
-      }).then(function() {
-      // Redirect the user
-      window.location.href="reserved.php";
-  });</script>';
-  }else{
-    echo '<script>swal({
-      title: "Oops!",
-      text: "Something went wrong please try again!",
-      icon: "warning",
-      }).then(function() {
-      // Redirect the user
-      window.location.href="reserved.php";
-  });</script>';
-  }
-
-  
-}?>
 <?php }else{
   header("Location:index.php");
   exit();

@@ -14,26 +14,24 @@ session_start();
 <body>
    <a href="logout.php">Logout</a> 
    <br>
-   <a href="home.php">Home</a>
-   <a href="pending.php">Pending Request</a>
+   <a href="home.php">Clients</a>
+   <a href="pending.php">Pending Requests</a>
    <a href="reserved.php">Reserved Rooms</a>
+   <a href="book-history.php">Booking History</a>
 
    <?php 
-    $sql = "SELECT rooms.room_number, rooms.status, room_types.name_of_room, book_info.room_id,
-    book_info.users_id, book_info.check_in, book_info.check_out FROM book_info
-    LEFT JOIN rooms ON book_info.room_id = rooms.id
-    LEFT JOIN users ON book_info.users_id = users.id
-    LEFT JOIN room_types ON rooms.room_type_id = room_types.id WHERE rooms.status = 'pending' ORDER BY book_info.added_on DESC";
+    $sql = "SELECT * FROM users ORDER BY added_on ASC";
     $query = mysqli_query($conn, $sql);
     if(mysqli_num_rows($query) > 0){
     ?>
     <table>
 					<thead>
 					<tr>
-					<th>Rooms</th>
-					<th>Room Types</th>
-					<th>Status</th>
-					<th>Operation</th>
+					<th>Account ID</th>
+					<th>First Name</th>
+					<th>Last Name</th>
+					<th>Email</th>
+					<th>Mobile Number</th>
 					</tr>
 					</thead>
 				
@@ -42,11 +40,11 @@ session_start();
 					?>
 					<tbody>
 					<tr>
-					<td><?php echo $rows['room_number'];?></td>
-					<td><?php echo $rows['name_of_room'];?></td>
-					<td><?php echo $rows['status'];?></td>
-					<td><a href="details.php?p&rid=<?php echo $rows['room_id']?>&id=<?php echo $rows['users_id']?>">View</a>
-					</td>
+					<td><?php echo $rows['account_id'];?></td>
+					<td><?php echo $rows['first_name'];?></td>
+					<td><?php echo $rows['last_name'];?></td>
+					<td><?php echo $rows['email'];?></td>
+					<td><?php echo $rows['mobile_number'];?></td>
 					</tr>
 					</tbody>
 					<?php
@@ -58,7 +56,7 @@ session_start();
     }
     else{
     ?>
-    <h3>No Pending Request Yet</h3>
+    <h3>No Clients Yet</h3>
     <?php
     }
    ?>
