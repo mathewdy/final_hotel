@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 08, 2021 at 11:02 AM
+-- Generation Time: Oct 08, 2021 at 07:05 PM
 -- Server version: 10.4.19-MariaDB
 -- PHP Version: 8.0.6
 
@@ -39,34 +39,6 @@ CREATE TABLE `admin` (
 
 INSERT INTO `admin` (`id`, `username`, `password`) VALUES
 (1, 'admin', '2fb8eddb850f05097cd730de7da46b9d');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `book_info`
---
-
-CREATE TABLE `book_info` (
-  `id` int(11) NOT NULL,
-  `room_id` int(11) NOT NULL,
-  `users_id` int(11) NOT NULL,
-  `guest` varchar(20) NOT NULL,
-  `check_in` datetime NOT NULL,
-  `check_out` datetime NOT NULL,
-  `added_on` datetime NOT NULL,
-  `status` varchar(20) NOT NULL,
-  `payment_method` varchar(20) NOT NULL,
-  `image` varchar(20) NOT NULL,
-  `bank` varchar(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `book_info`
---
-
-INSERT INTO `book_info` (`id`, `room_id`, `users_id`, `guest`, `check_in`, `check_out`, `added_on`, `status`, `payment_method`, `image`, `bank`) VALUES
-(1, 7, 1, '1', '2021-10-28 03:04:00', '2021-10-30 03:04:00', '2021-10-08 02:05:10', 'reserved', '', '', ''),
-(4, 1, 1, '1', '2021-10-29 00:00:00', '2021-10-30 00:00:00', '2021-10-07 23:52:18', 'pending', 'bank', 'Capture.PNG', 'BDO');
 
 -- --------------------------------------------------------
 
@@ -128,7 +100,7 @@ CREATE TABLE `packages` (
 --
 
 INSERT INTO `packages` (`id`, `name_package`, `description`) VALUES
-(1, 'Junior', 'Free breakfast with a satisfying amenities'),
+(1, 'Junior', 'Free breakfast with a satisfying amenity'),
 (2, 'Senior', 'Free breakfast,lunch, with kitchen facilities and pool'),
 (3, 'Veteran', 'Free breakfast lunch and a dinner with a kitchen facilities pool and a beverages of your choice');
 
@@ -206,12 +178,42 @@ INSERT INTO `room_types` (`id`, `name_of_room`, `price`, `image`, `package_id`) 
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `transactions`
+--
+
+CREATE TABLE `transactions` (
+  `id` int(11) NOT NULL,
+  `room_id` int(11) NOT NULL,
+  `users_id` int(11) NOT NULL,
+  `guest` varchar(20) NOT NULL,
+  `check_in` datetime NOT NULL,
+  `check_out` datetime NOT NULL,
+  `added_on` datetime NOT NULL,
+  `status` varchar(20) NOT NULL,
+  `payment_method` varchar(20) NOT NULL,
+  `image` varchar(20) NOT NULL,
+  `bank` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `transactions`
+--
+
+INSERT INTO `transactions` (`id`, `room_id`, `users_id`, `guest`, `check_in`, `check_out`, `added_on`, `status`, `payment_method`, `image`, `bank`) VALUES
+(1, 7, 1, '1', '2021-10-28 03:04:00', '2021-10-30 03:04:00', '2021-10-08 02:05:10', 'reserved', '', '', ''),
+(4, 1, 1, '1', '2021-10-29 00:00:00', '2021-10-30 00:00:00', '2021-10-07 23:52:18', 'pending', 'bank', 'Capture.PNG', 'BDO'),
+(5, 23, 1, '1', '2021-10-28 00:59:00', '2021-10-29 00:59:00', '2021-10-08 18:58:37', 'pending', 'bank', '244388041_2369941982', 'BDO'),
+(6, 1, 1, '1', '2021-10-14 00:00:00', '2021-10-23 00:00:00', '2021-10-09 01:00:11', 'reserved', 'paypal', '', '');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `users`
 --
 
 CREATE TABLE `users` (
   `id` int(11) NOT NULL,
-  `account_id` varchar(20) NOT NULL,
+  `account_id` int(20) NOT NULL,
   `first_name` varchar(20) NOT NULL,
   `last_name` varchar(20) NOT NULL,
   `email` varchar(50) NOT NULL,
@@ -226,7 +228,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `account_id`, `first_name`, `last_name`, `email`, `email_status`, `v_code`, `mobile_number`, `added_on`) VALUES
-(1, '762110070', 'mathew1', 'dy', 'mathewdalisay@gmail.com', 1, 'd92449bf128ffbe67419ddb07f63dd', '09156915704', '2021-10-07 01:18:04');
+(1, 762110070, 'mathew1', 'dy', 'mathewdalisay@gmail.com', 1, 'd92449bf128ffbe67419ddb07f63dd', '09156915704', '2021-10-07 01:18:04');
 
 --
 -- Indexes for dumped tables
@@ -237,14 +239,6 @@ INSERT INTO `users` (`id`, `account_id`, `first_name`, `last_name`, `email`, `em
 --
 ALTER TABLE `admin`
   ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `book_info`
---
-ALTER TABLE `book_info`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `room_id` (`room_id`),
-  ADD KEY `users_id` (`users_id`);
 
 --
 -- Indexes for table `id_info`
@@ -272,7 +266,8 @@ ALTER TABLE `packages`
 -- Indexes for table `rooms`
 --
 ALTER TABLE `rooms`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `room_type_id` (`room_type_id`);
 
 --
 -- Indexes for table `room_types`
@@ -280,6 +275,14 @@ ALTER TABLE `rooms`
 ALTER TABLE `room_types`
   ADD PRIMARY KEY (`id`),
   ADD KEY `package_id` (`package_id`);
+
+--
+-- Indexes for table `transactions`
+--
+ALTER TABLE `transactions`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `room_id` (`room_id`),
+  ADD KEY `users_id` (`users_id`);
 
 --
 -- Indexes for table `users`
@@ -296,12 +299,6 @@ ALTER TABLE `users`
 --
 ALTER TABLE `admin`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
--- AUTO_INCREMENT for table `book_info`
---
-ALTER TABLE `book_info`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `id_info`
@@ -334,6 +331,12 @@ ALTER TABLE `room_types`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
+-- AUTO_INCREMENT for table `transactions`
+--
+ALTER TABLE `transactions`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
@@ -344,10 +347,30 @@ ALTER TABLE `users`
 --
 
 --
+-- Constraints for table `id_info`
+--
+ALTER TABLE `id_info`
+  ADD CONSTRAINT `id_info_ibfk_1` FOREIGN KEY (`id_type`) REFERENCES `id_types` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `id_info_ibfk_2` FOREIGN KEY (`users_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `rooms`
+--
+ALTER TABLE `rooms`
+  ADD CONSTRAINT `rooms_ibfk_1` FOREIGN KEY (`room_type_id`) REFERENCES `room_types` (`id`);
+
+--
 -- Constraints for table `room_types`
 --
 ALTER TABLE `room_types`
   ADD CONSTRAINT `room_types_ibfk_1` FOREIGN KEY (`package_id`) REFERENCES `packages` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `transactions`
+--
+ALTER TABLE `transactions`
+  ADD CONSTRAINT `transactions_ibfk_1` FOREIGN KEY (`room_id`) REFERENCES `rooms` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `transactions_ibfk_2` FOREIGN KEY (`users_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

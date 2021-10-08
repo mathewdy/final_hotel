@@ -144,7 +144,7 @@ $error = NULL;
                 $sub_total = $days * $price;
                 $total = $sub_total + $tax;
                 
-                $insert_booking = "INSERT INTO book_info (`room_id`, `users_id`, `guest`, `check_in`, `check_out`, `added_on`, `status`, `payment_method`) VALUES 
+                $insert_booking = "INSERT INTO transactions (`room_id`, `users_id`, `guest`, `check_in`, `check_out`, `added_on`, `status`, `payment_method`) VALUES 
                 ('$room_id', '$id', '$number_of_guest', '$check_in', '$check_out' , '$date','$book_info_status','$default_payment_method')";
                 $sql_booking = mysqli_query($conn, $insert_booking);
                 if($sql_booking){

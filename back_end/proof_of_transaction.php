@@ -137,14 +137,14 @@ if(isset($_POST['payment'])){
 
     $added_on = date("Y-m-d H:i:s");
 
-    $query_insert = "INSERT INTO book_info (room_id,users_id,guest,check_in,check_out,added_on,status,payment_method,image,bank)
+    $query_insert = "INSERT INTO transactions (room_id,users_id,guest,check_in,check_out,added_on,status,payment_method,image,bank)
     VALUES ('$room_id','$id' , '$number_of_guests','$date_time_check_in','$date_time_check_out', '$added_on','$status', '$payment_method','$image_transaction','$bank')";    
     $run_insert = mysqli_query($conn,$query_insert);
     move_uploaded_file($_FILES["image_transaction"]["tmp_name"], "receipt/" . $_FILES["image_transaction"] ["name"]);
 
     if($run_insert){
         echo "added receipt" . " your receipt is pending, wait for transaction ";
-
+        //DD, ERD, SWAL 
         //dapat mareredirect sa home page. 
         // pano kami gagawa ng notification kapag okay na? email? 
     }else{
