@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 07, 2021 at 09:39 PM
+-- Generation Time: Oct 08, 2021 at 11:02 AM
 -- Server version: 10.4.19-MariaDB
 -- PHP Version: 8.0.6
 
@@ -54,15 +54,19 @@ CREATE TABLE `book_info` (
   `check_in` datetime NOT NULL,
   `check_out` datetime NOT NULL,
   `added_on` datetime NOT NULL,
-  `status` varchar(20) NOT NULL
+  `status` varchar(20) NOT NULL,
+  `payment_method` varchar(20) NOT NULL,
+  `image` varchar(20) NOT NULL,
+  `bank` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `book_info`
 --
 
-INSERT INTO `book_info` (`id`, `room_id`, `users_id`, `guest`, `check_in`, `check_out`, `added_on`, `status`) VALUES
-(1, 7, 1, '1', '2021-10-28 03:04:00', '2021-10-30 03:04:00', '2021-10-08 02:05:10', 'reserved');
+INSERT INTO `book_info` (`id`, `room_id`, `users_id`, `guest`, `check_in`, `check_out`, `added_on`, `status`, `payment_method`, `image`, `bank`) VALUES
+(1, 7, 1, '1', '2021-10-28 03:04:00', '2021-10-30 03:04:00', '2021-10-08 02:05:10', 'reserved', '', '', ''),
+(4, 1, 1, '1', '2021-10-29 00:00:00', '2021-10-30 00:00:00', '2021-10-07 23:52:18', 'pending', 'bank', 'Capture.PNG', 'BDO');
 
 -- --------------------------------------------------------
 
@@ -127,30 +131,6 @@ INSERT INTO `packages` (`id`, `name_package`, `description`) VALUES
 (1, 'Junior', 'Free breakfast with a satisfying amenities'),
 (2, 'Senior', 'Free breakfast,lunch, with kitchen facilities and pool'),
 (3, 'Veteran', 'Free breakfast lunch and a dinner with a kitchen facilities pool and a beverages of your choice');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `proof_of_transaction`
---
-
-CREATE TABLE `proof_of_transaction` (
-  `id` int(11) NOT NULL,
-  `user_id` int(11) NOT NULL,
-  `image` varchar(50) NOT NULL,
-  `bank` varchar(20) NOT NULL,
-  `added_on` datetime NOT NULL,
-  `room_id` int(11) NOT NULL,
-  `status` varchar(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `proof_of_transaction`
---
-
-INSERT INTO `proof_of_transaction` (`id`, `user_id`, `image`, `bank`, `added_on`, `room_id`, `status`) VALUES
-(1, 1, 'Capture.PNG', 'BPI', '2021-10-07 17:35:41', 10, 'pending'),
-(2, 1, 'Capture.PNG', 'BDO', '2021-10-07 20:06:05', 2, 'confirmed');
 
 -- --------------------------------------------------------
 
@@ -289,12 +269,6 @@ ALTER TABLE `packages`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `proof_of_transaction`
---
-ALTER TABLE `proof_of_transaction`
-  ADD PRIMARY KEY (`id`);
-
---
 -- Indexes for table `rooms`
 --
 ALTER TABLE `rooms`
@@ -327,7 +301,7 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `book_info`
 --
 ALTER TABLE `book_info`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `id_info`
@@ -346,12 +320,6 @@ ALTER TABLE `id_types`
 --
 ALTER TABLE `packages`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
---
--- AUTO_INCREMENT for table `proof_of_transaction`
---
-ALTER TABLE `proof_of_transaction`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `rooms`
