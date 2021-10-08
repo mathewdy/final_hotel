@@ -112,6 +112,9 @@ if(isset($_POST['payment'])){
     $time_check_in = $_POST['time_check_in'];
     $time_check_out = $_POST['time_check_out'];
 
+    $date_time_check_in = "".$check_in." ".$time_check_in."";
+    $date_time_check_out = "".$check_out." ".$time_check_out."";
+
     $number_of_guests = $_POST['number_of_guests'];
     $name_of_room = $_POST['name_of_room'];
     $room_number = $_POST['room_number'];
@@ -135,7 +138,7 @@ if(isset($_POST['payment'])){
     $added_on = date("Y-m-d H:i:s");
 
     $query_insert = "INSERT INTO book_info (room_id,users_id,guest,check_in,check_out,added_on,status,payment_method,image,bank)
-    VALUES ('$room_id','$id' , '$number_of_guests','$check_in','$check_out', '$added_on','$status', '$payment_method','$image_transaction','$bank')";    
+    VALUES ('$room_id','$id' , '$number_of_guests','$date_time_check_in','$date_time_check_out', '$added_on','$status', '$payment_method','$image_transaction','$bank')";    
     $run_insert = mysqli_query($conn,$query_insert);
     move_uploaded_file($_FILES["image_transaction"]["tmp_name"], "receipt/" . $_FILES["image_transaction"] ["name"]);
 

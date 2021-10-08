@@ -19,6 +19,9 @@ if(isset($_POST['review_details'])){
     $check_in = date('Y-m-d', strtotime($_POST['check_in']));
     $check_out = date('Y-m-d' , strtotime($_POST['check_out']));
 
+    $time_in = date('h:i A', strtotime($_POST['time_check_in']));
+    $time_out = date('h:i A', strtotime($_POST['time_check_out']));
+
     $time_check_in = $_POST['time_check_in'];
     $time_check_out = $_POST['time_check_out'];
 
@@ -82,17 +85,19 @@ if(isset($_POST['review_details'])){
     <input type="hidden" name="last_name" value="<?php echo $last_name?>">
     <input type="hidden" name="mobile_number" value="<?php echo $mobile_number?>">
     <input type="hidden" name="room_id" value="<?php echo $room_id?>">
+    <input type="hidden" name="time_check_in" value="<?php echo $time_check_in?>">
+    <input type="hidden" name="time_check_out" value="<?php echo $time_check_out?>">
 
     <div class="row">
         <div class="col-md-4">
             <label for="">Date of Check In</label>
             <input class="form-control" type="text" name="check_in" value="<?php echo $check_in?>" readonly>
-            <input type="text" name="time_check_in" value="<?php echo $time_check_in?>" readonly>
+            <input type="text" name="" value="<?php echo $time_in?>" readonly>
         </div>
         <div class="col-md-4">
             <label for="">Date of Check Out</label>
             <input class="form-control" type="text" name="check_out" value="<?php echo $check_out?>"  readonly> 
-            <input type="text" name="time_check_out" value="<?php echo $time_check_out?>" readonly> 
+            <input type="text" name="" value="<?php echo $time_out?>" readonly> 
         </div>
         <div class="col-md-4">
             <label for="">Number of Guests</label>
