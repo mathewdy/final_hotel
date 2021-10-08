@@ -96,13 +96,14 @@ $error = NULL;
 
 </div>
     <?php
-        if(isset($_GET['success']) && isset($_GET['id']) && isset($_GET['email']) && isset($_GET['room_id']) && isset($_GET['in']) && isset($_GET['out']) && isset($_GET['guest'])){
+        if(isset($_GET['success']) && isset($_GET['id']) && isset($_GET['email']) && isset($_GET['room_id']) && isset($_GET['in']) && isset($_GET['out']) && isset($_GET['guest']) && isset($_GET['mod'])){
             $id = $_GET['id'];
             $email = $_GET['email'];
             $room_id = $_GET['room_id'];
             $check_in = $_GET['in'];
             $check_out = $_GET['out'];
             $number_of_guest = $_GET['guest'];
+            $default_payment_method = $_GET['mod'];
         
             $chck_in = strtotime($_GET['in']);
             $chck_out = strtotime($_GET['out']);
@@ -128,7 +129,7 @@ $error = NULL;
 
             if(mysqli_num_rows($q_user) == 1){
     
-                $get_room_info = "SELECT rooms.id,rooms.room_number, room_types.name_of_room, room_types.price, rooms.status, packages.name_package, packages.description
+                $get_room_info = "SELECT rooms.id,rooms.room_number, room_types.name_of_room, room_types.price, packages.name_package, packages.description
                 FROM rooms 
                 LEFT JOIN room_types ON rooms.room_type_id = room_types.id
                 LEFT JOIN packages ON room_types.package_id = packages.id
@@ -143,11 +144,10 @@ $error = NULL;
                 $sub_total = $days * $price;
                 $total = $sub_total + $tax;
                 
-                $insert_booking = "INSERT INTO book_info (`room_id`, `users_id`, `guest`, `check_in`, `check_out`, `added_on`, `status`) VALUES 
-                ('$room_id', '$id', '$number_of_guest', '$check_in', '$check_out' , '$date','$book_info_status')";
+                $insert_booking = "INSERT INTO book_info (`room_id`, `users_id`, `guest`, `check_in`, `check_out`, `added_on`, `status`, `payment_method`) VALUES 
+                ('$room_id', '$id', '$number_of_guest', '$check_in', '$check_out' , '$date','$book_info_status','$default_payment_method')";
                 $sql_booking = mysqli_query($conn, $insert_booking);
                 if($sql_booking){
-                
                     require('fpdf184/fpdf.php');
                     // Format ng pag gawa ng pdf
                     // Cell(width, height, 'text', border(boolean to 1 & 0 lang), new line,'text align')
@@ -217,17 +217,17 @@ $error = NULL;
                     $pdf->Line(10, 195, 84, 195);
                     $pdf->Line(126, 195, 200, 195);
                     $send_pdf = $pdf->Output('', 'S');
-        
-                    $update_room_status = "UPDATE rooms SET `status` = '$change_room_status' WHERE id = '$room_id'";
-                    $sql_update_room_status = mysqli_query($conn, $update_room_status) && sendPDF($send_pdf, $email, $acc_id, $full_name);
-                        echo '<script>swal({
-                            title: "Transaction Success!",
-                            text: "Check your email for your receipt",
-                            type: "success"
-                            }).then(function() {
-                            // Redirect the user
-                            window.location.href="home.php";
-                        });</script>';
+                    
+                    sendPDF($send_pdf, $email, $acc_id, $full_name);
+                    echo '<script>swal({
+                        title: "Transaction Success!",
+                        text: "Check your email for your receipt",
+                        type: "success"
+                        }).then(function() {
+                        // Redirect the user
+                        window.location.href="home.php";
+                    });</script>';
+
                     
                 }else{
                     echo "May mali sa code pm mo ako -jade";
