@@ -39,17 +39,31 @@ if (isset($_SESSION['username']) && isset($_SESSION['password'])){
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../css/global-style.css">
   <title>Admin</title>
 </head>
-<body>
-    <h2>Admin Login</h2>
-    <form action="<?php echo $_SERVER['PHP_SELF']?>" method="POST">
-    <input type="text" name="username" placeholder="Username">
-    <input type="password" name="password" placeholder="Password">
-    <button type="submit" name="admin_login">Login</button>
-    <?php if (isset($error)):?> 
-        <?php echo $error?>
-    <?php endif?>
-    </form>
+<body style="background:rgba(0,0,0, 0.9);">
+  <div class="container">
+    <div class="row align-middle" style="display:grid; place-items:center; height:40em;">
+      <div class="col-lg-4"></div>
+      <div class="col-lg-4 mb-lg-3 text-center bg-light p-lg-5 rounded">
+          <form action="<?php echo $_SERVER['PHP_SELF']?>" method="POST">
+          <p class="display-3">Admin</p>
+          <hr class="featurette-divider">
+                <input class="form-control my-3" type="text" name="username" placeholder="Username">     
+                <input  class="form-control my-3" type="password" name="password" placeholder="Password">
+            
+            <hr class="featurette-divider">
+                <span class="d-flex justify-content-end"> 
+                <button class="btn btn-primary w-100" type="submit" name="admin_login">Sign in</button>
+            </span>
+            <?php if (isset($error)):?> 
+                <?php echo $error?>
+            <?php endif?>
+            </form>
+      </div>
+      <div class="col-lg-4"></div>
+    </div>
+  </div>
 </body>
 </html>
