@@ -22,7 +22,7 @@
    use PHPMailer\PHPMailer\SMTP;
    use PHPMailer\PHPMailer\Exception;
   
-   function sendPDF($send_pdf, $email, $account_id, $full_name){
+   function sendPDF($send_pdf, $email, $full_name){
        require ("../PHPMailer.php");
        require("../SMTP.php");
        require("../Exception.php");
@@ -41,7 +41,7 @@
            $mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
        
            //Recipients
-           $mail->setFrom('cmdyzxcvbnm123@gmail.com', 'Hotel De Luna');
+           $mail->setFrom('cmdyzxcvbnm123@gmail.com', 'ProCreation');
            $mail->addAddress($email);     //Add a recipient
            //add pdf attachment
            $mail->addStringAttachment($send_pdf,'Hotel Receipt.pdf');
@@ -260,7 +260,7 @@ if(isset($_GET['p']) && isset($_GET['id']) && isset($_GET['rid'])){
       $send_pdf = $pdf->Output('', 'S');
 
       $update_status = "UPDATE book_info SET `status` = '$status' WHERE users_id = '$user_id' AND room_id = '$room_id'";
-      $query_change = mysqli_query($conn, $update_status) && sendPDF($send_pdf, $email, $account_id, $full_name); ;
+      $query_change = mysqli_query($conn, $update_status) && sendPDF($send_pdf, $email, $full_name); ;
       if($query_change){
         echo '<script>swal({
           title: "Update Success!",

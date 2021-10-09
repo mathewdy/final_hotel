@@ -49,12 +49,12 @@ include ('../connection.php');
             $mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
         
             //Recipients
-            $mail->setFrom('cmdyzxcvbnm123@gmail.com', 'Hotel De Luna');
+            $mail->setFrom('cmdyzxcvbnm123@gmail.com', 'ProCreation');
             $mail->addAddress($email);     //Add a recipient
         
             //Content
             $mail->isHTML(true);                                  //Set email format to HTML
-            $mail->Subject = 'Email Verification from Hotel De Luna ';
+            $mail->Subject = 'Email Verification from ProCreation Hotel';
             $mail->Body    = "Thanks for registration! 
              Thank you so much! ♥  <br> your account id is 
             '$account_id'  <br>  Click the link to verify the email address.
