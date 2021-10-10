@@ -15,25 +15,20 @@ include ('../connection.php');
 </head>
 <body>
     <h3>Registration</h3>
-    
-    <?php
         
-    ?>
-    <?php  //actual link
-    echo $actual_link = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]"; ?>
-    
-    <?php
-    $server_host_request = $_SERVER['HTTP_HOST'].'/'.'verify.php';
-   
-
-    
+    <?php    
+   session_start();
+ include('../connection.php');
+    //gumamit ako ng php mailer
     use PHPMailer\PHPMailer\PHPMailer;
     use PHPMailer\PHPMailer\SMTP;
     use PHPMailer\PHPMailer\Exception;
+    // nilagay ko dito yung mga info ng user, email, verification code , at account id nya
+    // mag sesend ito sa email nya
     function sendMail($email,$vcode,$account_id){
-        require ("../PHPMailer.php");
-        require("../SMTP.php");
-        require("../Exception.php");
+        require ("PHPMailer.php");
+        require("SMTP.php");
+        require("Exception.php");
 
         $mail = new PHPMailer(true);
 
@@ -43,22 +38,22 @@ include ('../connection.php');
             $mail->isSMTP();                                            //Send using SMTP
             $mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
             $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
-            $mail->Username   = 'cmdyzxcvbnm123@gmail.com';                     //SMTP username
+            $mail->Username   = 'mathewmelendez123123@gmail.com';                     //SMTP username
             $mail->Password   = '62409176059359';                               //SMTP password
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
             $mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
         
             //Recipients
-            $mail->setFrom('cmdyzxcvbnm123@gmail.com', 'ProCreation');
+            $mail->setFrom('mathewmelendez123123@gmail.com', 'Hotel ProCreations');
             $mail->addAddress($email);     //Add a recipient
         
             //Content
             $mail->isHTML(true);                                  //Set email format to HTML
-            $mail->Subject = 'Email Verification from ProCreation Hotel';
-            $mail->Body    = "Thanks for registration! 
-             Thank you so much! ♥  <br> your account id is 
-            '$account_id'  <br>  Click the link to verify the email address.
-            <a href='http://$server_host_request?email=$email&account_id=$account_id&v_code=$vcode'>Verify</a>' " ;
+            $mail->Subject = 'Email verification code for ProCreations ';
+            $mail->Body    = "Thanks for registration ! Hello $email welcome to our Hotel
+            this is your account id '$account_id'
+            Click the link to verify the email address. Thank you so much! ♥ 
+            <a href='http://localhost/final_hotel/back_end/verify.php?email=$email&v_code=$vcode&account_id=$account_id'>Verify</a>' " ;
            
         
             $mail->send();
@@ -68,7 +63,12 @@ include ('../connection.php');
         }
         
     }
+
+    $error = NULL;
+
+   
     ?>
+
     <form action="registration.php" method="POST" enctype="multipart/form-data">
         <label for="">First Name</label>
         <input type="text" name="first_name" > <br>

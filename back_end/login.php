@@ -10,6 +10,7 @@ session_start();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <body>
     <form action="login.php" method="POST">
         <label for="">Account Id</label>
@@ -18,6 +19,7 @@ session_start();
         <input type="email" name="email">
         <input type="submit" name="login">
     </form>
+    <a href="registration.php">Register</a>
 </body>
 </html>
 
@@ -50,20 +52,28 @@ if(isset($_POST['login'])){
                     $_SESSION['account_id'] = $result_fetch['account_id'];
                     header("Location: home.php");
                 }else{
-                    //password incorrect
-                    echo "<script>alert('Password Incorrect')</script>";
-                    echo "<script>window.location.href= 'index.php' </script>";
+                    //incorrect id
+                    echo "<script>
+                    swal({
+                        title: 'Incorrect Id'
+                    });
+                    </script>";
+                 
                    
                 }
             }else{  //di pa verified account
-                echo "<script>alert('Please verify your email address')</script>";
-                echo "<script>window.location.href= 'index.php' </script>";
+                echo "<script>swal({
+                    title: 'Please verify your email address'
+                });</script>";
+              
                 
             }
             
         }else{//walang account
-            echo "<script>alert('Account not found.')</script>";
-            echo "<script>window.location.href= 'index.php' </script>";
+            echo "<script>swal({
+                title: 'Account not found'
+            });</script>";
+            
         }
     }
 
