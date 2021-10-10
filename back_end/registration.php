@@ -29,7 +29,6 @@ include ('../connection.php');
 
         try {
             //Server settings
-           
             $mail->isSMTP();                                            //Send using SMTP
             $mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
             $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
@@ -59,7 +58,6 @@ include ('../connection.php');
     }
 
     $error = NULL;
-
    
     ?>
 
@@ -94,15 +92,22 @@ include ('../connection.php');
 <?php
 
 if(isset($_POST['register'])){
+    
+   
     $first_name = $_POST['first_name'];
     $last_name = $_POST['last_name'];
     $email = $_POST['email'];
     $mobile_number = $_POST['mobile_number'];
 
+   
+
+    $id_number = $_POST['id_number'];
+
+ 
+
     $vcode = md5(rand('00000' , '99959' ));
 
     $id_type = $_POST['id_type'];
-    $id_number = $_POST['id_number'];
 
     $last_number = "SELECT * FROM users";
     $query_last_number = mysqli_query($conn, $last_number);
@@ -111,6 +116,7 @@ if(isset($_POST['register'])){
     date_default_timezone_set('Asia/Manila');
     $date = date("ymd");
     $email_status = 0;
+   
     $account_id = "".$rand_no."".$date."".$count."";
     $added_on = date("Y-m-d H:i:s");
 
@@ -119,6 +125,23 @@ if(isset($_POST['register'])){
     $allowed_extension = array('gif' , 'png' , 'jpeg', 'jpg' , 'PNG' , 'JPEG' , 'JPG' , 'GIF');
     $filename = $_FILES ['id_image']['name'];
     $file_extension = pathinfo($filename , PATHINFO_EXTENSION);
+
+    $validate = "SELECT * FROM users WHERE email='$email' AND account='$account_id'";
+    $run_validate = mysqli_query($conn,$validate);
+    if($run_validate){
+        if(mysqli_num_rows($run_validate) > 0){
+            echo  "email already use";
+          exit();
+        }
+    }
+  
+    $validate_id = "SELECT * FROM id_info WHERE number='$id_number'";
+    $run_validate_id = mysqli_query($conn,$validate_id);
+    if(mysqli_num_rows($run_validate_id) > 0){
+        echo "id already used";
+        exit();
+    }
+
 
     $query_insert = "INSERT INTO users (account_id,first_name,last_name,email,email_status,v_code,mobile_number,added_on)
     VALUES ('$account_id','$first_name', '$last_name', '$email',$email_status,'$vcode', '$mobile_number', '$added_on')";
