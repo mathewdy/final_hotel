@@ -1,23 +1,17 @@
 <?php
-
-include('../connection.php');
 session_start();
+include('../connection.php');
+include('./includes/header.php');
+
 
 $id = $_SESSION['id'];
 
 ?>
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hotel</title>
-</head>
-<body>
-    <a href="home.php">Back</a>
-    <h2>Your Booking History</h2>
+<div class="container p-lg-5">
+<a href="home.php" class="btn btn-dark mb-2"> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-left-fill" viewBox="0 0 16 16">
+<path d="m3.86 8.753 5.482 4.796c.646.566 1.658.106 1.658-.753V3.204a1 1 0 0 0-1.659-.753l-5.48 4.796a1 1 0 0 0 0 1.506z"/>
+</svg><small>Back</small></a>
+    <p class="lead display-3 text-muted">Booking History</p>
     <?php
     
     //results ng history
@@ -27,8 +21,18 @@ $id = $_SESSION['id'];
     FROM book_info 
     LEFT JOIN users ON book_info.users_id = users.id
     LEFT JOIN rooms ON book_info.room_id = rooms.id
-    WHERE users.id = '$id' AND book_info.status= 'reserved'";
-
+    WHERE users.id = '$id' AND book_info.status= 'reserved'"; ?>
+    <table class="table table-hover">
+        <thead class="text-muted">
+            <tr>
+                <th>Room Number</th>
+                <th>Number of Guest</th>
+                <th>Check In</th>
+                <th>Check Out</th>
+                <th>Date: Added On</th>
+            </tr>
+        </thead>
+    <?php
     $run_transaction = mysqli_query($conn,$query_transaction);
 
     if($run_transaction){
@@ -36,24 +40,16 @@ $id = $_SESSION['id'];
             foreach($run_transaction as $row){
                 ?>
 
-                    <table>
-                        <tr>
-                            <th>No.</th>
-                            <th>Room Number</th>
-                            <th>Number of Guest</th>
-                            <th>Check In</th>
-                            <th>Check Out</th>
-                            <th>Date: Added On</th>
-                        </tr>
-                        <tr>
-                            <td><?php echo $row ['id']. "."?> </td>
-                            <td><?php echo $row ['room_number']?></td>
-                            <td><?php echo $row['guest']?></td>
-                            <td><?php echo $row ['check_in']?></td>
-                            <td><?php echo $row ['check_out']?></td>
-                            <td><?php echo $row ['added_on']?></td>
-                        </tr>
-                    </table>
+    <tbody>
+        <tr>
+            <td><?php echo $row ['room_number']?></td>
+            <td><?php echo $row['guest']?></td>
+            <td><?php echo $row ['check_in']?></td>
+            <td><?php echo $row ['check_out']?></td>
+            <td><?php echo $row ['added_on']?></td>
+        </tr>
+    </tbody>
+    </table>
 
                 <?php
             }
@@ -61,11 +57,10 @@ $id = $_SESSION['id'];
             echo "No transactions yet";
         }
     }
-
     ?>
-
-<h2>Your Current Transactions</h2>
-
+</div>
+<div class="container p-lg-5">
+<p class="lead display-3 text-muted">Current Transaction</p>
 
     <?php
 
@@ -75,31 +70,32 @@ $id = $_SESSION['id'];
     LEFT JOIN rooms ON book_info.room_id = rooms.id
     LEFT JOIN users ON book_info.users_id = users.id
     WHERE book_info.status = 'pending' AND book_info.users_id ='$_SESSION[id]' ";
-    $run_pending = mysqli_query($conn,$query_pending);
-
+    $run_pending = mysqli_query($conn,$query_pending); ?>
+    <table class="table table-hover">
+        <thead class="text-muted">
+            <tr>
+                <th>Room</th>
+                <th>Payment Method</th>
+                <th>Bank</th>
+                <th>Date: Added On</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+    <?php
     if($run_pending){
         if(mysqli_num_rows($run_pending) > 0){
             foreach ($run_pending as $row){
                 ?>
-
-                    <table>
-                        <tr>
-                            <th>No.</th>
-                            <th>Room</th>
-                            <th>Payment Method</th>
-                            <th>Bank</th>
-                            <th>Date: Added On</th>
-                            <th>Status</th>
-                        </tr>
-                        <tr>
-                           <td><?php echo $row ['id']. "."?></td>
-                            <td><?php echo $row ['room_number']?>
-                            <td><?php echo $row['payment_method']?></td>
-                            <td><?php echo $row ['bank']?></td>
-                            <td><?php echo $row ['added_on']?></td>
-                            <td><?php echo $row ['status']?></td>
-                        </tr>
-                    </table>
+            <tbody>
+                <tr>
+                    <td><?php echo $row ['room_number']?>
+                    <td><?php echo $row['payment_method']?></td>
+                    <td><?php echo $row ['bank']?></td>
+                    <td><?php echo $row ['added_on']?></td>
+                    <td><?php echo $row ['status']?></td>
+                </tr>
+            </tbody>
+        </table>
 
                 <?php
             }
@@ -107,5 +103,8 @@ $id = $_SESSION['id'];
     }
 
     ?>
-</body>
-</html>
+</div>
+</div>
+<?php
+include('./includes/footer.php');
+?>
