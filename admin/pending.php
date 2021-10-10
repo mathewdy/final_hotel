@@ -1,21 +1,13 @@
 <?php 
   include("../connection.php");
+  include("./includes/header.php");
   session_start();
   if(empty($_SESSION['username']) && empty($_SESSION['password'])){
       header("Location:index.php");
       exit();
     }
 ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script> 
-  <title>Document</title>
-</head>
-<body>
+
 <?php
    
    use PHPMailer\PHPMailer\PHPMailer;
@@ -63,19 +55,30 @@
 
    echo NULL;
    ?> 
-      <a href="logout.php">Logout</a> 
-      <br>
-      <a href="home.php">Clients</a>
-      <a href="pending.php">Pending Requests</a>
-      <a href="reserved.php">Reserved Rooms</a>
-      <a href="book-history.php">Booking History</a>
-
-
-      <form action="" method="POST">
-      <input type="date" name="date">
-      <button type="submit" name="searchDate">Search</button>
-      </form>
-
+<div class="container bg-white vh-100">
+<ul class="nav nav-pills nav-fill">
+  <li class="nav-item"> 
+    <a class="nav-link" href="home.php">Clients</a>
+  </li>
+  <li class="nav-item"> 
+    <a class="nav-link active" href="pending.php">Pending Requests</a>
+  </li>
+  <li class="nav-item"> 
+    <a class="nav-link" href="reserved.php">Reserved Rooms</a>
+  </li>
+  <li class="nav-item"> 
+    <a class="nav-link" href="book-history.php">Booking History</a>
+  </li>
+</ul>
+<div class="container">
+<form action="" method="POST">
+    <span class="hstack gap-3 justify-content-end">
+      <input class="form-control w-25" type="date" name="date">
+      <button class="btn btn-primary" type="submit" name="searchDate">Search</button>      
+    </span>
+  </form>
+</div>
+<div class="container p-lg-5">
       <?php 
       if(isset($_POST['searchDate'])){
       $date = $_POST['date'];
@@ -98,9 +101,10 @@
       <span>Check in: <?php echo $rows['check_in']?></span><br>
       <span>Check out: <?php echo $rows['check_out']?></span><br>
       <span>Proof of Transaction: <img src="../back_end/receipt/<?php echo $rows['image']?>"></span><br>
-    <span>Paid via: <?php echo $rows['bank']?></span><br>
+      <span>Paid via: <?php echo $rows['bank']?></span><br>
       <span>Status: <?php echo $rows['status']?></span><br>
       <span>Added on: <?php echo $rows['added_on']?></span><br>
+      </div>
       <a href="pending.php?p&id=<?php echo $rows['id']?>&rid=<?php echo $rows['room_id']?>">Confirm</a><br>
       <?php }}else{?>
         No Data Found
@@ -127,6 +131,28 @@
     <span>Status: <?php echo ucwords($rows['status'])?></span><br>
     <span>Proof of Transaction: <img src="../back_end/receipt/<?php echo $rows['image']?>"></span><br>
     <span>Added on: <?php echo $rows['added_on']?></span><br>
+    <a href="" data-bs-toggle="modal" data-bs-target="#exampleModal">View</a>
+      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              <div class="modal-body">
+              <span>Account ID: <?php echo $rows['account_id']?></span><br>
+              <span>Booked Room: <?php echo $rows['room_number']?></span><br>
+              <span>Check in: <?php echo $rows['check_in']?></span><br>
+              <span>Check out: <?php echo $rows['check_out']?></span><br>
+              <span>Paid via: <?php echo $rows['bank']?></span><br>
+              <span>Status: <?php echo $rows['status']?></span><br>
+              <span>Proof of Transaction: <img src="../back_end/receipt/<?php echo $rows['image']?>"></span><br>
+              <span>Added on: <?php echo $rows['added_on']?></span><br>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+          </div>
+        </div>
+      </div>
     <a href="pending.php?p&id=<?php echo $rows['id']?>&rid=<?php echo $rows['room_id']?>">Confirm</a><br>
     <?php
     }
@@ -136,6 +162,9 @@
     <?php
       }}
    ?>
+   </div>
+</div>
+<script src="../js/bootstrap.js"></script>
 </body>
 </html>
 <?php 

@@ -1,30 +1,35 @@
 <?php 
   include("../connection.php");
+  include("./includes/header.php");
   session_start();
   if(isset($_SESSION['username']) && isset($_SESSION['password'])){
 ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script> 
-  <title>Document</title>
-</head>
-<body>
-      <a href="logout.php">Logout</a> 
-      <br>
-      <a href="home.php">Clients</a>
-      <a href="pending.php">Pending Requests</a>
-      <a href="reserved.php">Reserved Rooms</a>
-      <a href="book-history.php">Booking History</a>
+<div class="container bg-white vh-100">
+<ul class="nav nav-pills nav-fill">
+  <li class="nav-item"> 
+    <a class="nav-link" href="home.php">Clients</a>
+  </li>
+  <li class="nav-item"> 
+    <a class="nav-link" href="pending.php">Pending Requests</a>
+  </li>
+  <li class="nav-item"> 
+    <a class="nav-link" href="reserved.php">Reserved Rooms</a>
+  </li>
+  <li class="nav-item"> 
+    <a class="nav-link active" href="book-history.php">Booking History</a>
+  </li>
+</ul>
 
-      <form action="" method="POST">
-      <input type="date" name="date">
-      <button type="submit" name="searchDate">Search</button>
-      </form>
+<div class="container">
+  <form action="" method="POST">
+    <span class="hstack gap-3 justify-content-end">
+      <input class="form-control w-25" type="date" name="date">
+      <button class="btn btn-primary" type="submit" name="searchDate">Search</button>      
+    </span>
+  </form>
+</div>
 
+<div class="container p-lg-5">
       <?php 
       if(isset($_POST['searchDate'])){
       $date = $_POST['date'];
@@ -78,7 +83,9 @@
     <h3>No Reserved Room Yet</h3>
     <?php
       }}
-   ?>
+  ?>
+</div>
+</div>
 </body>
 </html>
 <?php }else{
