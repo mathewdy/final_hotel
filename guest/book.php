@@ -21,10 +21,12 @@ if(isset($_GET['b']) && isset($_GET['id'])){
 </head>
 <body>
 <?php
+
    
    use PHPMailer\PHPMailer\PHPMailer;
    use PHPMailer\PHPMailer\SMTP;
    use PHPMailer\PHPMailer\Exception;
+   
    function sendMail($last_name,$email,$vcode){
        require ("PHPMailer.php");
        require("SMTP.php");
@@ -39,7 +41,7 @@ if(isset($_GET['b']) && isset($_GET['id'])){
            $mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
            $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
            $mail->Username   = 'cmdyzxcvbnm123@gmail.com';                     //SMTP username
-           $mail->Password   = '62409176059359';                               //SMTP password
+           $mail->Password   = 'mathewpogi123';                               //SMTP password
            $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
            $mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
        
@@ -52,14 +54,16 @@ if(isset($_GET['b']) && isset($_GET['id'])){
            //modified code for guest
           
            $mail->Subject = 'Email Verification from ProCreation Hotel';
-           $mail->Body    = "Good Day $last_name!<br><p>Your Email Verification is: <b style=font-size: 30px;> $vcode </b></p>";
+           $mail->Body    = "Good Day $last_name!<br><p>Your Email Verification is <b style=font-size: 30px;> $vcode </b></p>";
           
        
            $mail->send();
            return true;
-       } catch (Exception $e) {
-           return false;
-       }
+       }  catch (Exception $e) {
+        echo $e->errorMessage(); //Pretty error messages from PHPMailer
+      } catch (Exception $e) {
+        echo $e->getMessage(); //Boring error messages from anything else!
+      }
        
    }
 
@@ -133,8 +137,10 @@ if(isset($_POST['request_book'])){
   $id_image = $_FILES['id_image']['name'];
   $check_in = $_POST['check_in'];
   $time_in = $_POST['time_in'];
+  $time_in = date("H:i:s", strtotime($time_in));
   $check_out = $_POST['check_out'];
   $time_out = $_POST['time_out'];
+  $time_out = date("H:i:s", strtotime($time_out));
   
   $time_in_format = "".$check_in." ".$time_in."";
   $time_out_format = "".$check_out." ".$time_out."";
@@ -313,11 +319,21 @@ if(isset($_POST['request_book'])){
         $query_validate = mysqli_query($conn, $validate_user);
 
         if(mysqli_num_rows($query_validate) == 1){
-
+          $rows = mysqli_fetch_array($query_validate);
           $update_vcode = "UPDATE users SET `v_code` = '$vcode' WHERE email = '$email'";
           $query_update = mysqli_query($conn, $update_vcode) && sendMail($last_name,$email,$vcode);
-          echo "galing";
-
+          if($query_update){
+            header("Location:otp.php?id=$room_id&uid=".$rows['id']."&g=$guest&in=$time_in_format&out=$time_out_format");
+          }else{
+            echo "<script>swal({
+              title: 'Oops invalid request!',
+              text: 'Something went wrong',
+              icon: 'warning',
+              }).then(function() {
+              // Redirect the user
+              window.location.href='book.php?b&id=$room_id';
+              });</script>";
+          }
         }else{
          
           $sql = "INSERT INTO users (account_id, first_name, last_name, email, email_status, v_code, mobile_number, added_on) VALUES ('$account_id', '$first_name', '$last_name', '$email', '$default_email_status', '$vcode', '$mobile_number', '$added_on')";
@@ -329,7 +345,18 @@ if(isset($_POST['request_book'])){
             VALUES('$id_type', '$id_number', '$id_image','$insert_id_fk', '$added_on')";
             move_uploaded_file($_FILES["id_image"]["tmp_name"], "../back_end/clients_image/" . $id_image);
             $run_fk = mysqli_query($conn,$query_fk) && sendMail($last_name,$email,$vcode);
-            echo "putangina";
+            if($run_fk){
+              header("Location:otp.php?id=$room_id&uid=$insert_id_fk&g=$guest&in=$time_in_format&out=$time_out_format");
+            }else{
+              echo "<script>swal({
+                title: 'Oops invalid request!',
+                text: 'Something went wrong',
+                icon: 'warning',
+                }).then(function() {
+                // Redirect the user
+                window.location.href='book.php?b&id=$room_id';
+                });</script>";
+            }
             }else{
 
             echo "error" . $conn->error;
