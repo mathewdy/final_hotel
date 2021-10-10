@@ -33,19 +33,19 @@ include ('../connection.php');
             $mail->isSMTP();                                            //Send using SMTP
             $mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
             $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
-            $mail->Username   = 'mathewmelendez123123@gmail.com';                     //SMTP username
-            $mail->Password   = '62409176059359';                               //SMTP password
+            $mail->Username   = 'cmdyzxcvbnm123@gmail.com';                     //SMTP username
+            $mail->Password   = 'mathewpogi123';                               //SMTP password
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
             $mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
         
             //Recipients
-            $mail->setFrom('mathewmelendez123123@gmail.com', 'Novaliches General Hospital');
+            $mail->setFrom('cmdyzxcvbnm@gmail.com', 'Hotel ProCreations');
             $mail->addAddress($email);     //Add a recipient
         
             //Content
             $mail->isHTML(true);                                  //Set email format to HTML
-            $mail->Subject = 'Email Verification from Novaliches General Hospital ';
-            $mail->Body    = "Thanks for registration ! Hello $email welcome to <b> NGH </b> 
+            $mail->Subject = 'Email Verification from ProCreations';
+            $mail->Body    = "Thanks for registration ! Hello $email welcome to Our Hotel
             this is your account id '$account_id'
             Click the link to verify the email address. Thank you so much! ♥ 
             <a href='http://localhost/final_hotel/back_end/verify.php?email=$email&v_code=$vcode&account_id=$account_id'>Verify</a>' " ;
