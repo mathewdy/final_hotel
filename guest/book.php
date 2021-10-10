@@ -1,4 +1,5 @@
 <?php
+include "email_status.php";
 include "../connection.php";
 
 if(isset($_GET['b']) && isset($_GET['id'])){
@@ -166,7 +167,7 @@ if(isset($_POST['request_book'])){
 
   $default_email_status = 0;
 
-  $allowed_extension = array('gif' , 'png' , 'jpeg', 'jpg' , 'PNG' , 'JPEG' , 'JPG' , 'GIF');
+  $allowed_extension = array('png' , 'jpeg', 'jpg' , 'PNG' , 'JPEG' , 'JPG');
   $filename = $id_image;
   $file_extension = pathinfo($filename , PATHINFO_EXTENSION);
   
@@ -301,18 +302,17 @@ if(isset($_POST['request_book'])){
     }else{
       $check_user_book = "SELECT users.id FROM transactions
       LEFT JOIN users ON transactions.users_id = users.id
-      WHERE users.email = '$email'";
+      WHERE users.email = '$email' AND users.first_name = '$first_name' AND users.last_name = '$last_name' AND users.mobile_number = '$mobile_number'";
       $query_user_book = mysqli_query($conn, $check_user_book);
       if(mysqli_num_rows($query_user_book) == 1){
         echo "<script>swal({
           title: 'Oops invalid request!',
-          text: 'Select your time-out',
+          text: 'You already have requested room',
           icon: 'warning',
           }).then(function() {
           // Redirect the user
-          window.location.href='index.php';
+          window.location.href='book.php?b&id=$room_id';
           });</script>";
-          exit();
       }else{
 
         $validate_user = "SELECT * FROM users WHERE email = '$email'";
