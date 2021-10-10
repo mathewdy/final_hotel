@@ -22,8 +22,8 @@ if(empty($_SESSION['email'])){
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./css/global-style.css"/>
-    <link rel="stylesheet" href="./css/book-now.css">
+    <link rel="stylesheet" href="../css/global-style.css"/>
+    <link rel="stylesheet" href="../css/book-now.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/css/bootstrap-datepicker.css"/>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/js/bootstrap-datepicker.js"></script>
@@ -148,7 +148,7 @@ if(empty($_SESSION['email'])){
                                     <div class="accordion-body">
                                         <div class="row">
                                             <div class="col-md-12 pb-0">
-                                            <img src="<?php echo "./Photos/hotel_rooms/" . $row ['image']?>" height="150" width="100%" alt="image">
+                                            <img src="<?php echo "../Photos/hotel_rooms/" . $row ['image']?>" height="150" width="100%" alt="image">
                                             </div>
                                             <div class="col-md-12">
                                                 <span class="d-flex">
