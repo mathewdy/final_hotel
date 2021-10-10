@@ -50,9 +50,9 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 function sendPDF($send_pdf, $email, $acc_id, $full_name){
-    require("PHPMailer.php");
-    require("SMTP.php");
-    require("Exception.php");
+    require("../PHPMailer.php");
+    require("../SMTP.php");
+    require("../Exception.php");
 
     $mail = new PHPMailer(true);
 
