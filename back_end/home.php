@@ -1,14 +1,11 @@
 <?php
-
+session_start();
 include('../connection.php');
 include('./includes/header.php');
-?>
-<div class="container">
-<?php
-session_start();
-echo $_SESSION['email'];
 
 ?>
+<div class="container">
+
     <a href="#">Home</a>
     <a href="all.php">Rooms</a>
     
@@ -19,7 +16,7 @@ echo $_SESSION['email'];
     <!---para sa history Transactions ng user--->
     <a href="transactions.php">Transactions</a>
 
-    <a href="profile.php">Settings</a>
 </div>
+<script src="../js/bootstrap.js"></script>
 </body>
 </html>
