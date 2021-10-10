@@ -9,7 +9,7 @@ include "../connection.php";
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-<script src="https://www.paypal.com/sdk/js?client-id=AY39CmurvQ07z6GuahuonFH6v4pQlUMe8Zb9bib0nj7sS6FYCGm-M6HviIlJ5L2-iUb0HgATLDQWt27w"></script>
+
   <title>Document</title>
 </head>
 <body>
@@ -37,7 +37,9 @@ include "../connection.php";
     }
     ?>
     asdasd
-    <div id="paypal-payment-button"></div>
+    <div id="paypal-payment-button">
+
+    </div>
 
   <?php }else if(isset($_GET['other']) && isset($_GET['id']) && isset($_GET['uid']) && isset($_GET['g']) && isset($_GET['in']) && isset($_GET['out'])){
     $room_id = $_GET['id'];
@@ -61,15 +63,15 @@ include "../connection.php";
     }
   }
   ?>
-  asdsadasdasd
-    <div id="paypal-payment-button"></div>
+
 
   <?php }else{?>
     <?php echo "error"?>
   <?php }?>
 
- 
+
 </body>
+<script src="https://www.paypal.com/sdk/js?client-id=AY39CmurvQ07z6GuahuonFH6v4pQlUMe8Zb9bib0nj7sS6FYCGm-M6HviIlJ5L2-iUb0HgATLDQWt27w"></script>
 <script>
     paypal.Buttons({
     style : {
@@ -82,7 +84,7 @@ include "../connection.php";
         return actions.order.create({
             purchase_units:[{
                 amount: {
-                    value: '<?php echo "11"?>'
+                  value: '11'
                 }
             }]
         });
@@ -91,10 +93,15 @@ include "../connection.php";
         return actions.order.capture().then(function(details){
             console.log(details)
             
-            window.location.replace("http://<?php echo $_SERVER['SERVER_NAME']?>/final_hotel/back_end/success.php?success&id=<?php echo $id?>&email=<?php echo $email?>&room_id=<?php echo $room_id?>&in=<?php echo $date_time_check_in?>&out=<?php echo $date_time_check_out?>&guest=<?php echo $number_of_guest?>&originator=<?php echo $mobile_number?>&recipients=<?php echo $mobile_number?>&mod=<?php echo $default_payment_method?>")
+            window.location.replace("http://localhost/final_hotel/back_end/success.php")
 
         })
     }
 }).render('#paypal-payment-button')
+
+
+
+</script>
+
 </script>
 </html>
