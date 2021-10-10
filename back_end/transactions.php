@@ -16,23 +16,13 @@ $id = $_SESSION['id'];
     
     //results ng history
 
-    $query_transaction = "SELECT book_info.guest, book_info.check_in, book_info.check_out,book_info.added_on, 
-    users.last_name , users.first_name, rooms.room_number ,book_info.id, book_info.status
-    FROM book_info 
-    LEFT JOIN users ON book_info.users_id = users.id
-    LEFT JOIN rooms ON book_info.room_id = rooms.id
-    WHERE users.id = '$id' AND book_info.status= 'reserved'"; ?>
-    <table class="table table-hover">
-        <thead class="text-muted">
-            <tr>
-                <th>Room Number</th>
-                <th>Number of Guest</th>
-                <th>Check In</th>
-                <th>Check Out</th>
-                <th>Date: Added On</th>
-            </tr>
-        </thead>
-    <?php
+    $query_transaction = "SELECT transactions.guest, transactions.check_in, transactions.check_out,transactions.added_on, 
+    users.last_name , users.first_name, rooms.room_number ,transactions.id, transactions.status
+    FROM transactions 
+    LEFT JOIN users ON transactions.users_id = users.id
+    LEFT JOIN rooms ON transactions.room_id = rooms.id
+    WHERE users.id = '$id' AND transactions.status= 'done'";
+
     $run_transaction = mysqli_query($conn,$query_transaction);
 
     if($run_transaction){
@@ -64,41 +54,41 @@ $id = $_SESSION['id'];
 
     <?php
 
-    $query_pending = "SELECT  book_info.guest, book_info.check_in,book_info.check_out,
-    book_info.added_on,book_info.status, rooms.room_number,users.id, book_info.payment_method, book_info.bank
-    FROM book_info 
-    LEFT JOIN rooms ON book_info.room_id = rooms.id
-    LEFT JOIN users ON book_info.users_id = users.id
-    WHERE book_info.status = 'pending' AND book_info.users_id ='$_SESSION[id]' ";
-    $run_pending = mysqli_query($conn,$query_pending); ?>
-    <table class="table table-hover">
-        <thead class="text-muted">
-            <tr>
-                <th>Room</th>
-                <th>Payment Method</th>
-                <th>Bank</th>
-                <th>Date: Added On</th>
-                <th>Status</th>
-            </tr>
-        </thead>
-    <?php
+    $query_pending = "SELECT  transactions.guest, transactions.check_in,transactions.check_out,
+    transactions.added_on,transactions.status, rooms.room_number,users.id, transactions.payment_method, transactions.bank
+    FROM transactions 
+    LEFT JOIN rooms ON transactions.room_id = rooms.id
+    LEFT JOIN users ON transactions.users_id = users.id
+    WHERE transactions.status = 'pending' OR transactions.status='reserved' AND transactions.users_id ='$_SESSION[id]' ";
+    $run_pending = mysqli_query($conn,$query_pending);
+
     if($run_pending){
         if(mysqli_num_rows($run_pending) > 0){
             foreach ($run_pending as $row){
                 ?>
-            <tbody>
-                <tr>
-                    <td><?php echo $row ['room_number']?>
-                    <td><?php echo $row['payment_method']?></td>
-                    <td><?php echo $row ['bank']?></td>
-                    <td><?php echo $row ['added_on']?></td>
-                    <td><?php echo $row ['status']?></td>
-                </tr>
-            </tbody>
-        </table>
+                    <table>
+                        <tr>
+                            <th>No.</th>
+                            <th>Room</th>
+                            <th>Payment Method</th>
+                            <th>Bank</th>
+                            <th>Date: Added On</th>
+                            <th>Status</th>
+                        </tr>
+                        <tr>
+                           <td><?php echo $row ['id']. "."?></td>
+                            <td><?php echo $row ['room_number']?>
+                            <td><?php echo $row['payment_method']?></td>
+                            <td><?php echo $row ['bank']?></td>
+                            <td><?php echo $row ['added_on']?></td>
+                            <td><?php echo $row ['status']?></td>
+                        </tr>
+                    </table>
 
                 <?php
             }
+        }else{
+            echo "No transactions yet" . $conn->error;
         }
     }
 
