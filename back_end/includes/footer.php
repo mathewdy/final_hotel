@@ -1,5 +1,5 @@
 
-<footer class="container-fluid text-center bg-light p-lg-4 vh-25">
+<footer class="container-fluid text-center mt-5 bg-light p-lg-4">
     <span class="border-bottom border-dark">
         <p class="text-dark">
             Lorem ipsum dolor sit amet, consectetur adipisicing elit. 

@@ -5,10 +5,10 @@ include('./includes/header.php');
 
 ?>
 
-<div class="container mt-2 p-xxl-3">
-<a href="home.php" class="btn btn-primary mb-2"> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-left-fill" viewBox="0 0 16 16">
+<div class="container mt-0 p-xxl-3">
+<a href="home.php" class="btn btn-dark mb-2"> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-left-fill" viewBox="0 0 16 16">
 <path d="m3.86 8.753 5.482 4.796c.646.566 1.658.106 1.658-.753V3.204a1 1 0 0 0-1.659-.753l-5.48 4.796a1 1 0 0 0 0 1.506z"/>
-</svg> Back</a>
+</svg><small>Back</small></a>
 <ul class="nav nav-pills">
     <li class="nav-item">
         <a href="all.php" class="nav-link"><small>All</small></a>
