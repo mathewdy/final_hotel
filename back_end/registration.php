@@ -1,9 +1,6 @@
 <?php
 
 include ('../connection.php');
-
-
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -15,10 +12,8 @@ include ('../connection.php');
 </head>
 <body>
     <h3>Registration</h3>
-        
+    
     <?php    
-   session_start();
-    include('../connection.php');
     //gumamit ako ng php mailer
     use PHPMailer\PHPMailer\PHPMailer;
     use PHPMailer\PHPMailer\SMTP;
@@ -44,18 +39,17 @@ include ('../connection.php');
             $mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
         
             //Recipients
-            $mail->setFrom('mathewmelendez123123@gmail.com', 'Hotel ProCreations');
+            $mail->setFrom('mathewmelendez123123@gmail.com', 'Novaliches General Hospital');
             $mail->addAddress($email);     //Add a recipient
         
             //Content
             $mail->isHTML(true);                                  //Set email format to HTML
-            $mail->Subject = 'Email verification code for ProCreations ';
-            $mail->Body    = "Thanks for registration ! Hello $email welcome to our Hotel
+            $mail->Subject = 'Email Verification from Novaliches General Hospital ';
+            $mail->Body    = "Thanks for registration ! Hello $email welcome to <b> NGH </b> 
             this is your account id '$account_id'
             Click the link to verify the email address. Thank you so much! ♥ 
             <a href='http://localhost/final_hotel/back_end/verify.php?email=$email&v_code=$vcode&account_id=$account_id'>Verify</a>' " ;
-           
-        
+
             $mail->send();
             return true;
         } catch (Exception $e) {
@@ -97,8 +91,6 @@ include ('../connection.php');
 </body>
 </html>
 
-
-
 <?php
 
 if(isset($_POST['register'])){
@@ -130,7 +122,7 @@ if(isset($_POST['register'])){
 
     $query_insert = "INSERT INTO users (account_id,first_name,last_name,email,email_status,v_code,mobile_number,added_on)
     VALUES ('$account_id','$first_name', '$last_name', '$email',$email_status,'$vcode', '$mobile_number', '$added_on')";
-    $run_insert = mysqli_query ($conn,$query_insert) && sendMail($email,$vcode,$account_id);
+    $run_insert = mysqli_query ($conn,$query_insert);
 
     if($run_insert){
         echo "added user" . '<br>';
@@ -138,7 +130,7 @@ if(isset($_POST['register'])){
         $query_fk = "INSERT INTO id_info (id_type,number,image,users_id,added_on)
         VALUES('$id_type', '$id_number', '$id_image','$insert_id_fk', '$added_on')";
         move_uploaded_file($_FILES["id_image"]["tmp_name"], "clients_image/" . $_FILES["id_image"] ["name"]);
-        $run_fk = mysqli_query($conn,$query_fk);
+        $run_fk = mysqli_query($conn,$query_fk) && sendMail($email,$vcode,$account_id);
 
         if($run_fk){
             echo "added users";
