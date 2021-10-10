@@ -1,4 +1,5 @@
 <?php
+include "email_status.php";
 include "../connection.php";
 if(isset($_GET['id']) && isset($_GET['uid']) && isset($_GET['g']) && isset($_GET['in']) && isset($_GET['out'])){
   $room_id = $_GET['id'];
@@ -34,6 +35,12 @@ if(isset($_GET['id']) && isset($_GET['uid']) && isset($_GET['g']) && isset($_GET
   <title>Document</title>
 </head>
 <body>
+    <a href="index.php">Home</a>
+    <a href="rooms.php">Rooms</a>
+    <a href="economy.php">Economy</a>
+    <a href="deluxe.php">Deluxe</a>
+    <a href="executive.php">Executive</a>
+    <a href="">Sign in</a>
   <?php
   $get_request_room = "SELECT rooms.id,rooms.room_number, room_types.name_of_room, room_types.price, room_types.image, packages.name_package, packages.description
   FROM rooms 

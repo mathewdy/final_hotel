@@ -1,4 +1,5 @@
 <?php
+include "email_status.php";
 include "../connection.php";
 ?><!DOCTYPE html>
 <html lang="en">
