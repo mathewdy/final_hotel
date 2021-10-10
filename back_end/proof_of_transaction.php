@@ -104,26 +104,7 @@ if(isset($_POST['proof_of_transaction'])){
                         </div>  
         
 
-        <!-- <label for="">Select Bank</label> --> 
-        <!---di pa to tapos--->
-        <!---yung deposit slip dapat to -->
-        
-        <!-- <select name="bank" id="">
-            <option value="">-Select-</option>
-            <option value="BDO">BDO Unibank Inc.</option>
-            <option value="Metro bank">Metropolitan Bank and Trust Company</option>
-            <option value="BPI">Bank of the Philippine Islands</option>
-            <option value="Land Bank">Land Bank of the Philippines</option>
-            <option value="PNB">Philippine National Bank</option>
-            <option value="Security Bank">Security Bank Corporation</option>
-            <option value="China Bank">China Banking Corporation</option>
-            <option value="DBP">Development Bank of the Philippines</option>
-            <option value="Union Bank">Union Bank of the Philippines</option>
-            <option value="Rizal Bank">Rizal Commercial Banking and Corporation</option>
-        </select> -->
-
-         <!-- <label for="">Upload Image</label>
-        <input type="file" name="image_transaction"> <br> -->
+       
 
         <input type="hidden" name="id" value="<?php echo $id?>">
         <input type="hidden" name="account_id"  value="<?php echo $account_id?>" >
