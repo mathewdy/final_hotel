@@ -92,7 +92,7 @@ include ('../connection.php');
         <input type="text" name="id_number"> <br>
         
         <input type="submit" name="register" value="Register">
-        <a href="#">Log In</a>
+        <a href="login.php">Log In</a>
     </form>
 </body>
 </html>
