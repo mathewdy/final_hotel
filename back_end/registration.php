@@ -18,7 +18,7 @@ include ('../connection.php');
         
     <?php    
    session_start();
- include('../connection.php');
+    include('../connection.php');
     //gumamit ako ng php mailer
     use PHPMailer\PHPMailer\PHPMailer;
     use PHPMailer\PHPMailer\SMTP;
@@ -96,6 +96,8 @@ include ('../connection.php');
     </form>
 </body>
 </html>
+
+
 
 <?php
 
