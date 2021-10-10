@@ -2,6 +2,7 @@
 
 session_start();
 include('../connection.php');
+$user_id = $_SESSION['id'];
 
 if(empty($_SESSION['email'])){
     echo "<script> window.location.href='index.php'</script>";
@@ -31,6 +32,17 @@ if(isset($_POST['review_details'])){
     $price = $_POST['price'];
     $description = $_POST['description'];
     $name_package = $_POST['name_package'];
+
+
+    $unable_to_book = "SELECT users_id FROM transactions WHERE  users_id='$user_id' ";
+    $run_unable = mysqli_query($conn,$unable_to_book);
+
+    if(mysqli_num_rows($run_unable) > 0){
+        echo "<script>alert('You still have a current transaction') </script>";
+        echo "<script>window.location.href='home.php' </script>";
+        exit();
+    }
+
 }
 
 ?>
@@ -155,13 +167,6 @@ if(isset($_POST['review_details'])){
     <input class="form-control" type="hidden" name="description" value="<?php echo $description?>" readonly>
     <input type="submit" name="proof_of_transaction" value="Proof of transaction">
 </form>
-
-<?php
-
-
-
-?>
-
 
 </div>
 </body>

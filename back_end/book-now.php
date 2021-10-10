@@ -218,6 +218,6 @@ check_in.on("changeDate", function(e) {
     check_out.prop('disabled', false);
 });
     </script>
-    <script src="./js/bootstrap.js"></script>
+    <script src="../js/bootstrap.js"></script>
 </body>
 </html>

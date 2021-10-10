@@ -13,8 +13,7 @@ include('./includes/header.php');
     <a href="executive.php">Executive</a>
     <a href="deluxe.php">Deluxe</a>
 
-    <!---para sa history Transactions ng user--->
-    <a href="transactions.php">Transactions</a>
+  
 
 </div>
 <script src="../js/bootstrap.js"></script>
