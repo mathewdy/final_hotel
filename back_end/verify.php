@@ -10,7 +10,7 @@ if(isset($_GET['email']) && isset($_GET['v_code']))
     $run_query = mysqli_query($conn,$query);
 
     if($run_query){
-        $status_valid = "SELECT email_status FROM users WHERE email='$email'";
+        $status_valid = "SELECT email_status WHERE email='$email'";
         $run_status_valid = mysqli_query($conn,$status_valid);
         if($run_status_valid == '0'){
             $update = "UPDATE users SET email_status ='1' WHERE email='$email'";
