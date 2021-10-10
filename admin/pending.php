@@ -14,10 +14,10 @@
    use PHPMailer\PHPMailer\SMTP;
    use PHPMailer\PHPMailer\Exception;
   
-   function sendPDF($send_pdf, $email, $full_name){
-       require ("../PHPMailer.php");
-       require("../SMTP.php");
-       require("../Exception.php");
+   function sendPDF($send_pdf, $email, $full_name, $account_id){
+       require ("PHPMailer.php");
+       require("SMTP.php");
+       require("Exception.php");
 
        $mail = new PHPMailer(true);
 
@@ -84,13 +84,13 @@
       $date = $_POST['date'];
       $format_date = date('Y-m-d', strtotime($date));
 
-      $get_date = "SELECT users.id, users.account_id, rooms.room_number, book_info.image,
-      book_info.room_id, book_info.check_in, book_info.check_out, book_info.bank, book_info.status, book_info.added_on 
-      FROM book_info 
-      LEFT JOIN rooms ON book_info.room_id = rooms.id
-      LEFT JOIN users ON book_info.users_id = users.id 
-      WHERE DATE_FORMAT(book_info.check_in,'%Y-%m-%d') = '$format_date' AND book_info.status = 'pending'
-      ORDER BY book_info.added_on DESC";
+      $get_date = "SELECT users.id, users.account_id, rooms.room_number, transactions.image,
+      transactions.room_id, transactions.check_in, transactions.check_out, transactions.bank, transactions.status, transactions.added_on 
+      FROM transactions 
+      LEFT JOIN rooms ON transactions.room_id = rooms.id
+      LEFT JOIN users ON transactions.users_id = users.id 
+      WHERE DATE_FORMAT(transactions.check_in,'%Y-%m-%d') = '$format_date' AND transactions.status = 'pending'
+      ORDER BY transactions.added_on DESC";
       $query_date = mysqli_query($conn, $get_date);
       if(mysqli_num_rows($query_date) > 0){
         while($rows = mysqli_fetch_array($query_date)){
@@ -112,12 +112,12 @@
       <?php }else{?>
     
 <?php 
-    $sql = "SELECT users.id, users.account_id, rooms.room_number, book_info.image,
-    book_info.room_id, book_info.check_in, book_info.check_out, book_info.bank, book_info.status, book_info.added_on FROM book_info 
-    LEFT JOIN rooms ON book_info.room_id = rooms.id
-    LEFT JOIN users ON book_info.users_id = users.id 
-    WHERE book_info.payment_method = 'bank' AND book_info.status = 'pending'
-    ORDER BY book_info.added_on DESC";
+    $sql = "SELECT users.id, users.account_id, rooms.room_number, transactions.image,
+    transactions.room_id, transactions.check_in, transactions.check_out, transactions.bank, transactions.status, transactions.added_on FROM transactions 
+    LEFT JOIN rooms ON transactions.room_id = rooms.id
+    LEFT JOIN users ON transactions.users_id = users.id 
+    WHERE transactions.payment_method = 'bank' AND transactions.status = 'pending'
+    ORDER BY transactions.added_on DESC";
     $query = mysqli_query($conn, $sql);
     if(mysqli_num_rows($query) > 0){
       while($rows = mysqli_fetch_array($query)){
@@ -178,14 +178,14 @@ if(isset($_GET['p']) && isset($_GET['id']) && isset($_GET['rid'])){
 
   $sql = "SELECT users.account_id, users.first_name, users.last_name, users.email, users.mobile_number,
       rooms.room_number, room_types.name_of_room, packages.name_package, packages.description,
-      room_types.price, book_info.payment_method, book_info.bank, book_info.guest, book_info.check_in,
-      book_info.check_out, book_info.status
+      room_types.price, transactions.payment_method, transactions.bank, transactions.guest, transactions.check_in,
+      transactions.check_out, transactions.status
       FROM rooms
       JOIN users
       LEFT JOIN room_types ON rooms.room_type_id = room_types.id
       LEFT JOIN packages ON room_types.package_id = packages.id
-      LEFT JOIN book_info ON book_info.room_id = rooms.id
-      WHERE users.id = '$user_id' AND rooms.id = '$room_id' AND book_info.status = 'pending'";
+      LEFT JOIN transactions ON transactions.room_id = rooms.id
+      WHERE users.id = '$user_id' AND rooms.id = '$room_id' AND transactions.status = 'pending'";
       $query = mysqli_query($conn, $sql);
       if(mysqli_num_rows($query) > 0){
       $rows = mysqli_fetch_array($query);
@@ -288,8 +288,8 @@ if(isset($_GET['p']) && isset($_GET['id']) && isset($_GET['rid'])){
       $pdf->Line(126, 215, 200, 215);
       $send_pdf = $pdf->Output('', 'S');
 
-      $update_status = "UPDATE book_info SET `status` = '$status' WHERE users_id = '$user_id' AND room_id = '$room_id'";
-      $query_change = mysqli_query($conn, $update_status) && sendPDF($send_pdf, $email, $full_name); ;
+      $update_status = "UPDATE transactions SET `status` = '$status' WHERE users_id = '$user_id' AND room_id = '$room_id'";
+      $query_change = mysqli_query($conn, $update_status) && sendPDF($send_pdf, $email, $full_name, $account_id);
       if($query_change){
         echo '<script>swal({
           title: "Update Success!",

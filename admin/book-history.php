@@ -35,13 +35,13 @@
       $date = $_POST['date'];
       $format_date = date('Y-m-d', strtotime($date));
 
-      $get_date = "SELECT users.id, users.account_id, rooms.room_number, book_info.image,
-      book_info.room_id, book_info.check_in, book_info.check_out, book_info.bank, book_info.status, book_info.added_on 
-      FROM book_info 
-      LEFT JOIN rooms ON book_info.room_id = rooms.id
-      LEFT JOIN users ON book_info.users_id = users.id 
-      WHERE DATE_FORMAT(book_info.check_in,'%Y-%m-%d') = '$format_date' AND book_info.status = 'done'
-      ORDER BY book_info.added_on DESC";
+      $get_date = "SELECT users.id, users.account_id, rooms.room_number, transactions.image,
+      transactions.room_id, transactions.check_in, transactions.check_out, transactions.bank, transactions.status, transactions.added_on 
+      FROM transactions 
+      LEFT JOIN rooms ON transactions.room_id = rooms.id
+      LEFT JOIN users ON transactions.users_id = users.id 
+      WHERE DATE_FORMAT(transactions.check_in,'%Y-%m-%d') = '$format_date' AND transactions.status = 'done'
+      ORDER BY transactions.added_on DESC";
       $query_date = mysqli_query($conn, $get_date);
       if(mysqli_num_rows($query_date) > 0){
         while($rows = mysqli_fetch_array($query_date)){
@@ -59,12 +59,12 @@
       <?php }else{?>
 
 <?php 
-    $sql = "SELECT users.id, users.account_id, rooms.room_number, book_info.image,
-    book_info.bank,  book_info.check_in, book_info.check_out, book_info.status, book_info.added_on FROM book_info 
-    LEFT JOIN rooms ON book_info.room_id = rooms.id
-    LEFT JOIN users ON book_info.users_id = users.id 
-    WHERE book_info.status = 'done'
-    ORDER BY book_info.added_on DESC";
+    $sql = "SELECT users.id, users.account_id, rooms.room_number, transactions.image,
+    transactions.bank,  transactions.check_in, transactions.check_out, transactions.status, transactions.added_on FROM transactions 
+    LEFT JOIN rooms ON transactions.room_id = rooms.id
+    LEFT JOIN users ON transactions.users_id = users.id 
+    WHERE transactions.status = 'done'
+    ORDER BY transactions.added_on DESC";
     $query = mysqli_query($conn, $sql);
     if(mysqli_num_rows($query) > 0){
       while($rows = mysqli_fetch_array($query)){

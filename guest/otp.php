@@ -1,5 +1,20 @@
 <?php
 include "../connection.php";
+if(isset($_GET['id']) && isset($_GET['aid'])){
+  $room_id = $_GET['id'];
+  $account_id = $_GET['aid'];
+  if(empty($room_id) && empty($account_id)){
+    header("Location:index.php");
+  }else{
+    $check_account = "SELECT account_id FROM users WHERE account_id = '$account_id'";
+    $query_check = mysqli_query($conn, $check_account);
+    if(mysqli_num_rows($query_check) == 0){
+      echo "wala sa db";
+    }
+  }
+}else{
+  echo "error";
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -18,6 +33,7 @@ include "../connection.php";
     <a href="executive.php">Executive</a>
     <a href="">Sign in</a>
  <h2>OTP CODE</h2>
+ <?php echo $room_id?>
  <form action="" method="POST">
  <input type="number" name="otp_number">
  <button type="submit" name="check_otp">Submit</button>
@@ -26,14 +42,31 @@ include "../connection.php";
 </html>
 <?php
   if(isset($_POST['check_otp'])){
-    date_default_timezone_set('Asia/Manila');
-    $current = date('Y-m-d');
-    $past = "2021-10-11";
-    
-    if($current > $past){
-      echo "current";
-    }else{
-      echo "past pa";
+    $otp_number = $_POST['otp_number'];
+
+    $sql = "SELECT * FROM users WHERE account_id = '$account_id'";
+    $query = mysqli_query($conn, $sql);
+    if(mysqli_num_rows($query) > 0 ){
+      $rows = mysqli_fetch_array($query);
+      if($otp_number == $rows['v_code']){
+        $update_code = "UPDATE users SET `v_code` = 0 WHERE accoount_id = '$account_id'";
+        $query_update = mysqli_query($conn, $update_code);
+        if($query_update){
+          header("Location:details.php?id=$room_id&aid=$account_id");
+          exit();
+        }else{
+          echo "error" . $conn->error;
+        }
+        }else{
+        echo "<script>swal({
+          title: 'Oops!',
+          text: 'Invalid code, try again',
+          icon: 'warning',
+          }).then(function() {
+          // Redirect the user
+          window.location.href='otp.php?id=$room_id&aid=$account_id';
+          });</script>";
+      }
     }
   }
 ?>

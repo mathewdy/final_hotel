@@ -26,9 +26,9 @@ if(isset($_GET['b']) && isset($_GET['id'])){
    use PHPMailer\PHPMailer\SMTP;
    use PHPMailer\PHPMailer\Exception;
    function sendMail($last_name,$email,$vcode){
-       require ("../PHPMailer.php");
-       require("../SMTP.php");
-       require("../Exception.php");
+       require ("PHPMailer.php");
+       require("SMTP.php");
+       require("Exception.php");
 
        $mail = new PHPMailer(true);
 
@@ -97,6 +97,27 @@ if(isset($_GET['b']) && isset($_GET['id'])){
     <a href="index.php">Back</a>
     <button type="submit" name="request_book">Next</button>
     </form>
+    <?php 
+    $display_room = "SELECT rooms.id,rooms.room_number, room_types.name_of_room, room_types.price, room_types.image, packages.name_package, packages.description
+    FROM rooms 
+    LEFT JOIN room_types ON rooms.room_type_id = room_types.id
+    LEFT JOIN packages ON room_types.package_id = packages.id
+    WHERE rooms.id = $room_id";
+    $query_room = mysqli_query($conn, $display_room);
+    if(mysqli_num_rows($query_room) > 0){
+      $rows = mysqli_fetch_array($query_room);
+    ?>
+    <h2>Room Info</h2>
+    <img src="../Photos/hotel_rooms/<?php echo $rows['image']?>">
+    <p>Room Number: <?php echo $rows['room_number']?></p>
+    <p>Room Type: <?php echo ucwords($rows['name_of_room'])?></p>
+    <p>Price: <?php echo $rows['price']?></p>
+    <p>Package: <?php echo $rows['room_number']?></p>
+    <p>Room Number: <?php echo $rows['room_number']?></p>
+    
+    <?php
+    }
+    ?>
 </body>
 </html>
 
@@ -272,8 +293,8 @@ if(isset($_POST['request_book'])){
         window.location.href='book.php?b&id=$room_id';
         });</script>";
     }else{
-      $check_user_book = "SELECT users.id FROM book_info
-      LEFT JOIN users ON book_info.users_id = users.id
+      $check_user_book = "SELECT users.id FROM transactions
+      LEFT JOIN users ON transactions.users_id = users.id
       WHERE users.email = '$email'";
       $query_user_book = mysqli_query($conn, $check_user_book);
       if(mysqli_num_rows($query_user_book) == 1){
@@ -295,8 +316,7 @@ if(isset($_POST['request_book'])){
 
           $update_vcode = "UPDATE users SET `v_code` = '$vcode' WHERE email = '$email'";
           $query_update = mysqli_query($conn, $update_vcode) && sendMail($last_name,$email,$vcode);
-          header("location:otp.php?id=$room_id");
-          exit();
+          echo "galing";
 
         }else{
          
@@ -309,8 +329,7 @@ if(isset($_POST['request_book'])){
             VALUES('$id_type', '$id_number', '$id_image','$insert_id_fk', '$added_on')";
             move_uploaded_file($_FILES["id_image"]["tmp_name"], "../back_end/clients_image/" . $id_image);
             $run_fk = mysqli_query($conn,$query_fk) && sendMail($last_name,$email,$vcode);
-            header("Location:otp.php?id=$room_id");
-            exit();
+            echo "putangina";
             }else{
 
             echo "error" . $conn->error;
