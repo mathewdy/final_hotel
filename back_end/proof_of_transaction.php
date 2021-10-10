@@ -3,6 +3,7 @@
 //di pa to tapos , paki ayos ung oras ng check_in at check_out
 session_start();
 include('../connection.php');
+include('./includes/header.php');
 
 if(isset($_POST['proof_of_transaction'])){
     $id = $_POST['id'];
@@ -40,29 +41,70 @@ if(isset($_POST['proof_of_transaction'])){
     <title>Document</title>
 </head>
 <body>
-    <a href="home.php">Cancel</a>
-    <h3>Bank Partners</h3>
+    
+    
     <form action="#" method=POST enctype="multipart/form-data">
+    <div class="container-lg p-lg-5 mt-lg-3  d-flex align-items-center justify-content-center ">
+        <div class="shadow p-3 mb-5 bg-body rounded">
+        <h2>Bank Partners</h2>
+                <div class="row d-flex align-items-center justify-content-center">
 
-        <label for="">Select Bank</label>
-        <!---di pa to tapos--->
-        <!---yung deposit slip dapat to -->
-        <select name="bank" id="">
-            <option value="">-Select-</option>
-            <option value="BDO">BDO Unibank Inc.</option>
-            <option value="Metro bank">Metropolitan Bank and Trust Company</option>
-            <option value="BPI">Bank of the Philippine Islands</option>
-            <option value="Land Bank">Land Bank of the Philippines</option>
-            <option value="PNB">Philippine National Bank</option>
-            <option value="Security Bank">Security Bank Corporation</option>
-            <option value="China Bank">China Banking Corporation</option>
-            <option value="DBP">Development Bank of the Philippines</option>
-            <option value="Union Bank">Union Bank of the Philippines</option>
-            <option value="Rizal Bank">Rizal Commercial Banking and Corporation</option>
-        </select>
+                    
+                
+                        
+                    <div class="col-md-7 position-relative">
+                        <div class="shadow-sm p-3 mb-5 bg-body rounded">
+                            <label for="exampleDataList" class="form-label">Search fucking bank</label>
+                                <input class="form-control" list="datalistOptions" id="exampleDataList" placeholder="Select Bank">
+                                    <datalist id="datalistOptions">
+                                    <option value="BDO">BDO Unibank Inc.</option>
+                                    <option value="Metro bank">Metropolitan Bank and Trust Company</option>
+                                    <option value="BPI">Bank of the Philippine Islands</option>
+                                    <option value="Land Bank">Land Bank of the Philippines</option>
+                                    <option value="PNB">Philippine National Bank</option>
+                                    <option value="Security Bank">Security Bank Corporation</option>
+                                    <option value="China Bank">China Banking Corporation</option>
+                                    <option value="DBP">Development Bank of the Philippines</option>
+                                    <option value="Union Bank">Union Bank of the Philippines</option>
+                                    <option value="Rizal Bank">Rizal Commercial Banking and Corporation</option>
+                                    </datalist>
+                                </div>
 
-        <label for="">Upload Image</label>
-        <input type="file" name="image_transaction"> <br>
+                    </div>
+
+                    <div class="col-md-7 position-relative box">
+                        <div class="shadow-sm p-3 mb-5 bg-body rounded">
+                    
+                            <div class="col-md-12">
+                            <label for="formFile" class="form-label">Upload Image </label>
+                            <input class="form-control" type="file" id="formFile" name="image_transaction">
+                            </div>
+                            </div>
+                        </div>
+
+
+                        <div class="col-md-10 position-relative">
+                    
+                            <div class="col-md-12  align-items-center" style="padding-top: 10%; padding-left: 60%; " >
+                                <button type="button" class="btn btn-primary" name="payment" value="Pay">Pay</button>
+                               
+                                <button type="button" class="btn btn-danger">Cancel</button>
+                        
+                               
+                            </div>
+
+                            
+                        </div>
+                        
+
+                        </div>
+                   
+                        </div>
+                        
+                        </div>  
+        
+
+       
 
         <input type="hidden" name="id" value="<?php echo $id?>">
         <input type="hidden" name="account_id"  value="<?php echo $account_id?>" >
@@ -85,11 +127,11 @@ if(isset($_POST['proof_of_transaction'])){
         <br>
        
 
-        <input type="submit" name="payment" value="Pay">
+      
     </form>
 
 </body>
-</html>
+</html> 
 
 <?php
 
