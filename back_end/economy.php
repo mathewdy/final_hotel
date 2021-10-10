@@ -21,7 +21,8 @@ include('./includes/header.php');
     <li class="nav-item">
         <a href="executive.php" class="nav-link"><small>Executive Rooms</small></a>
     </li>
-</ul>
+</ul> 
+<hr class="featurette-divider">
 </div>
 
     <?php
@@ -36,8 +37,8 @@ include('./includes/header.php');
 
         if(mysqli_num_rows($run_economy) > 0){
                 ?>
-                <hr class="featurette-divider">
-                <div class="container">
+               
+                <div class="container pt-0 mt-0">
                     <div class="row">
                 <?php foreach($run_economy as $row) {?>
                     
@@ -48,7 +49,7 @@ include('./includes/header.php');
                         <p class="p-0 m-0">Room number : <?php echo $row ['room_number']?></p>
                         <p class="p-0 m-0">Price : <?php echo $row ['price']?></p>
                         <p class="p-0 m-0">Package : <?php echo $row ['name_package']?></p>
-                        <p class="p-0 m-0">Description : <?php echo $row ['description']?></p>
+                        <p class="p-0 m-0 mb-3">Description : <?php echo $row ['description']?></p>
 
                         <a class="btn btn-dark w-100" href="book-now.php?id=<?php echo $row ['room_number']?>">View</a>
                     </div>
@@ -58,10 +59,10 @@ include('./includes/header.php');
             }
             ?>
             </div>
+            <hr class="featurette-divider">
             </div>
         <?php }
     ?>
-    <script src="../js/bootstrap.js"></script>
-</body>
-</html>
-
+<?php
+include('./includes/footer.php')
+?>
