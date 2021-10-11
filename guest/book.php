@@ -13,6 +13,7 @@ if(isset($_GET['b']) && isset($_GET['id'])){
 }else{
   header("Location:index.php");
 }
+//sample
 ?>
 
 <?php
