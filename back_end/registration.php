@@ -1,18 +1,10 @@
 <?php
-
-include ('../connection.php');
 session_start();
+include ('../connection.php');
+include ('../guest/includes/header.php');
 ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hotel</title>
-</head>
-<body>
-    <h3>Registration</h3>
+
+
     
     <?php    
     //gumamit ako ng php mailer
@@ -61,18 +53,20 @@ session_start();
     $error = NULL;
    
     ?>
-
+<div class="container-fluid pt-5">
+    <div class="container p-5 pt-5 bg-light" style="display:grid; place-items:center;">
+    <p class="display-3 text-muted">Registration</p>
     <form action="registration.php" method="POST" enctype="multipart/form-data">
         <label for="">First Name</label>
-        <input type="text" name="first_name" > <br>
+        <input class="form-control" type="text" name="first_name" > <br>
         <label for="">Last Name</label>
-        <input type="text" name="last_name"> <br>
+        <input class="form-control" type="text" name="last_name"> <br>
         <label for="">Email</label>
-        <input type="email" name="email"> <br>
+        <input class="form-control"type="email" name="email"> <br>
         <label for="">Mobile Number</label>
-        <input type="text" name="mobile_number"> <br>
+        <input  class="form-control"type="text" name="mobile_number"> <br>
         <label for="">Select Id:</label>
-        <select name="id_type" id=""> 
+        <select class="form-select" name="id_type" id=""> 
             <option value="">-Select Id-</option>
             <option value="1">SSS</option>
             <option value="2">UMID</option>
@@ -80,15 +74,21 @@ session_start();
             <option value="4">Professional ID Card</option>
         </select> <br>
         <label for="">Id Picture</label>
-        <input type="file" name="id_image" id=""> <br>
+        <input class="form-control" type="file" name="id_image" id=""> <br>
         <label for="">ID Number</label>
-        <input type="text" name="id_number"> <br>
-        
-        <input type="submit" name="register" value="Register">
-        <a href="login.php">Log In</a>
+        <input class="form-control"type="text" name="id_number"> <br>
+        <span class="d-flex justify-content-between">
+            <input class="btn btn-dark" type="submit" name="register" value="Register">
+            <a class="btn btn-light" href="../guest/index.php">Log In</a>
+        </span>
+       
     </form>
-</body>
-</html>
+    </div>
+</div>
+
+<?php
+include "../guest/includes/footer.php";
+?>
 
 <?php
 
@@ -127,6 +127,89 @@ if(isset($_POST['register'])){
     $filename = $_FILES ['id_image']['name'];
     $file_extension = pathinfo($filename , PATHINFO_EXTENSION);
 
+    if(empty($_POST['first_name']) && empty($_POST['last_name']) && empty($_POST['email']) && empty($_POST['mobile_number'])
+    && empty($_POST['id_type']) && empty ($_POST['id_number']) && empty($_POST['id_image'])){
+    echo "<script>swal({
+        title: 'Oops invalid request!',
+        text: 'Please fill up the form',
+        icon: 'warning',
+        }).then(function() {
+        // Redirect the user
+        window.location.href='registration.php';
+        });</script>";
+    }else if(empty($_POST['first_name'])){
+    echo "<script>swal({
+        title: 'Oops invalid request!',
+        text: 'Input your first name',
+        icon: 'warning',
+        }).then(function() {
+        // Redirect the user
+        window.location.href='registration.php';
+        });</script>";
+    }else if(empty($_POST['last_name'])){
+    echo "<script>swal({
+        title: 'Oops invalid request!',
+        text: 'Input your last name',
+        icon: 'warning',
+        }).then(function() {
+        // Redirect the user
+        window.location.href='registration.php';
+        });</script>";
+    }else if(empty($_POST['email'])){
+    echo "<script>swal({
+        title: 'Oops invalid request!',
+        text: 'Input your email',
+        icon: 'warning',
+        }).then(function() {
+         // Redirect the user
+        window.location.href='registration.php';
+        });</script>";
+    }else if(empty($_POST['mobile_number'])){
+    echo "<script>swal({
+        title: 'Oops invalid request!',
+        text: 'Input your mobile number',
+        icon: 'warning',
+        }).then(function() {
+        // Redirect the user
+        window.location.href='registration.php';
+        });</script>";
+    }else if(empty($_POST['id_type'])){
+    echo "<script>swal({
+        title: 'Oops invalid request!',
+        text: 'Choose ID Type',
+        icon: 'warning',
+        }).then(function() {
+        // Redirect the user
+        window.location.href='registration.php';
+        });</script>";
+    }else if(empty($_POST['id_number'])){
+    echo "<script>swal({
+        title: 'Oops invalid request!',
+        text: 'Input your ID Number',
+        icon: 'warning',
+        }).then(function() {
+        // Redirect the user
+        window.location.href='registration.php';
+        });</script>";
+    }else if(empty($id_image)){
+    echo "<script>swal({
+        title: 'Oops invalid request!',
+        text: 'Attached your ID Image',
+        icon: 'warning',
+        }).then(function() {
+        // Redirect the user
+        window.location.href='registration.php';
+        });</script>";
+    }else if(!in_array($file_extension, $allowed_extension)){
+    echo "<script>swal({
+        title: 'Oops invalid request!',
+        text: 'Invalid image format',
+        icon: 'warning',
+        }).then(function() {
+        // Redirect the user
+        window.location.href='registration.php';
+        });</script>";
+    }else{
     $validate = "SELECT * FROM users WHERE email='$email' AND account='$account_id'";
     $run_validate = mysqli_query($conn,$validate);
     if($run_validate){
@@ -163,6 +246,5 @@ if(isset($_POST['register'])){
         }
     }
 }
-
+}
 ?>
-

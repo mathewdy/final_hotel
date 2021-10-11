@@ -1,6 +1,7 @@
 <?php
 include "email_status.php";
 include "../connection.php";
+include "./includes/header.php";
 
 if(isset($_GET['b']) && isset($_GET['id'])){
   $room_id = $_GET['id'];
@@ -11,16 +12,7 @@ if(isset($_GET['b']) && isset($_GET['id'])){
   header("Location:index.php");
 }
 ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script> 
-  <title>Document</title>
-</head>
-<body>
+
 <?php
 
    
@@ -70,38 +62,47 @@ if(isset($_GET['b']) && isset($_GET['id'])){
 
    echo NULL;
    ?> 
-    <a href="index.php">Home</a>
-    <a href="rooms.php">Rooms</a>
-    <a href="economy.php">Economy</a>
-    <a href="deluxe.php">Deluxe</a>
-    <a href="executive.php">Executive</a>
-    <a href="">Sign in</a>
+<div class="container d-flex">
 
-  <h2>Fill up form</h2>
+
+<div class="container mt=0 pt-0">
+  <p class="display-3 lead text-muted pt-0 mt-0">Fill up Form</p>
+  <hr class="featurette-divider">
   <form action="" method="POST" enctype="multipart/form-data">
-    <input type="text" name="first_name" placeholder="First name"><br>
-    <input type="text" name="last_name" placeholder="Last name"><br>
-    <input type="email" name="email" placeholder="Email"><br>
-    <input type="number" name="mobile_number" placeholder="Mobile #"><br>
-    <input type="number" name="guest" placeholder="No. of guest"><br>
-    <select name="id_type" id="">
+    <input class="form-control" type="text" name="first_name" placeholder="First name"><br>
+    <input class="form-control" type="text" name="last_name" placeholder="Last name"><br>
+    <input class="form-control" type="email" name="email" placeholder="Email"><br>
+    <input class="form-control" type="number" name="mobile_number" placeholder="Mobile #"><br>
+    <input class="form-control" type="number" name="guest" placeholder="No. of guest"><br>
+    <select class="form-select" name="id_type" id="">
             <option value="">-Select ID-</option>
             <option value="1">SSS</option>
             <option value="2">UMID</option>
             <option value="3">Driver`s License</option>
             <option value="4">Professional ID</option>
         </select><br>
-    <input type="number" name="id_number" placeholder="ID Number"><br>
-    <input type="file" name="id_image" id="id_image"><br>
-    <h3>Check in</h3>
-    <input type="date" name="check_in">
-    <input type="time" name="time_in"><br>
-    <h3>Check out</h3>
-    <input type="date" name="check_out">
-    <input type="time" name="time_out"><br><br>
-    <a href="index.php">Back</a>
-    <button type="submit" name="request_book">Next</button>
+    <input class="form-control" type="number" name="id_number" placeholder="ID Number"><br>
+    <input class="form-control" type="file" name="id_image" id="id_image"><br>
+    <p class="lead text-muted mb-0">Check in</p>
+    <span class="hstack">
+      <input class="form-control" type="date" name="check_in">
+      <input class="form-control" type="time" name="time_in"><br>
+    </span>
+    <p class="lead text-muted mb-0">Check out</p>
+    <span class="hstack">
+      <input class="form-control" type="date" name="check_out">
+      <input class="form-control" type="time" name="time_out"><br><br>
+    </span>
+    <span class="d-flex justify-content-between">
+      <a class="btn btn-light" href="index.php">Back</a>
+      <button class="btn btn-primary" type="submit" name="request_book">Next</button>
+    </span>
+   
     </form>
+</div>
+<div class="container">
+
+
     <?php 
     $display_room = "SELECT rooms.id,rooms.room_number, room_types.name_of_room, room_types.price, room_types.image, packages.name_package, packages.description
     FROM rooms 
@@ -112,19 +113,65 @@ if(isset($_GET['b']) && isset($_GET['id'])){
     if(mysqli_num_rows($query_room) > 0){
       $rows = mysqli_fetch_array($query_room);
     ?>
-    <h2>Room Info</h2>
-    <img src="../Photos/hotel_rooms/<?php echo $rows['image']?>">
-    <p>Room Number: <?php echo $rows['room_number']?></p>
-    <p>Room Type: <?php echo ucwords($rows['name_of_room'])?></p>
-    <p>Price: <?php echo $rows['price']?></p>
-    <p>Package: <?php echo $rows['room_number']?></p>
-    <p>Room Number: <?php echo $rows['room_number']?></p>
+      <div class="accordion" id="accordionExample">
+      <div class="accordion-item">
+      <h2 class="accordion-header" id="headingOne">
+      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#accordion" aria-expanded="true" aria-controls="collapseOne">
+      ROOM INFORMATION
+      </button>
+      </h2>
+      <div id="accordion" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+      
+      <div class="accordion-body">
     
+      <div class="row">
+
+      <div class="col-lg-12 pb-0">
+
+      <img src="<?php echo "../Photos/hotel_rooms/" . $rows ['image']?>" height="250" width="100%" alt="image">
+      </div>
+      <div class="col-lg-12">
+
+      <span class="d-flex">
+      <p class="lead p-0 m-0">Room Type:</p>
+      <input type="hidden" name="room_id" value="<?php echo $row ['id']?>">     
+      <p class="lead p-0 px-sm-1 m-0"><?php echo $rows ['name_of_room']?></p>
+      </span>
+
+      <span class="d-flex">
+      <p class="lead p-0 m-0">Room Number: </p>
+      <p class="lead p-0 px-sm-1 m-0"> <?php echo $rows ['room_number']?></p>
+      </span>
+
+      <span class="d-flex">
+      <p class="lead p-0 m-0">Price: </p>
+      <p class="lead p-0 px-sm-1 m-0"><?php echo $rows ['price']?></p>
+      </span>
+
+      <span class="d-flex">
+      <p class="lead p-0 m-0">Package: </p>
+      <p class="lead p-0 px-sm-1 m-0"> <?php echo $rows ['name_package']?></p>
+      </span>
+
+      </div>
+      </div>
+      </div>
+      </div>
+      <div class="accordion-footer p-2 px-3 position-relative">
+      <p class="lead m-0">Inclusions:</p>
+      <p class="lead m-0"><?php echo $rows ['description']?></p>
+      </div>
+      </div>
+      </div>
+      </div>
     <?php
     }
     ?>
-</body>
-</html>
+</div>
+
+<?php
+include "./includes/footer.php";
+?>
 
 <?php 
 if(isset($_POST['request_book'])){
