@@ -1,4 +1,6 @@
 <?php
+ob_start();
+
 include "email_status.php";
 include "../connection.php";
 include "./includes/header.php";
