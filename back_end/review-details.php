@@ -1,7 +1,7 @@
 
 <?php
 
-session_start();
+
 include('../connection.php');
 include('./includes/header.php');
 
@@ -9,7 +9,7 @@ $user_id = $_SESSION['id'];
 
 
 if(empty($_SESSION['email'])){
-    echo "<script> window.location.href='index.php'</script>";
+    echo "<script> window.location.href='../guest/index.php'</script>";
 }
 
 if(isset($_POST['review_details'])){

@@ -1,7 +1,7 @@
 <?php
 
 //di pa to tapos , paki ayos ung oras ng check_in at check_out
-session_start();
+
 include('../connection.php');
 include('./includes/header.php');
 

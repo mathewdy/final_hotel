@@ -4,7 +4,7 @@
 //MAY ERROR SA PAYPAL
 
 //Paki ayos yung pag insert sa DB JIDI
-session_start();
+
 include('../connection.php');
 include('./includes/header.php');
 

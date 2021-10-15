@@ -77,9 +77,9 @@ include ('../guest/includes/header.php');
         <input class="form-control" type="file" name="id_image" id=""> <br>
         <label for="">ID Number</label>
         <input class="form-control"type="text" name="id_number"> <br>
-        <span class="d-flex justify-content-between">
-            <input class="btn btn-dark" type="submit" name="register" value="Register">
-            <a class="btn btn-light" href="../guest/index.php">Log In</a>
+        <span class="d-flex justify-content-between" >
+            <input class="btn btn-dark w-100" type="submit" name="register" value="Register">
+           
         </span>
        
     </form>

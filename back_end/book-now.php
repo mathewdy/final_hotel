@@ -2,7 +2,7 @@
 
 //di pa to tapos
 
-session_start();
+
 include('../connection.php');
 include('./includes/header.php');
 
