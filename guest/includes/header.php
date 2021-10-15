@@ -40,7 +40,7 @@
                         </div>
                         <div class="modal-body">
                         <div class="d-flex justify-content-center align-items-center ">
-                                <form action="login.php" method="POST">
+                                <form action="back_end/login.php" method="POST">
                                 <h3 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Log in</h3>
                                 <div class="form-outline mb-4">
                                     <input type="email" name="email" id="form2Example17" class="form-control form-control-lg" />

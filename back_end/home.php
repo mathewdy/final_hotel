@@ -1,6 +1,7 @@
 <?php
 
-include('../connection.php');
+include "../connection.php";
+
 include('./includes/header.php');
 
 
