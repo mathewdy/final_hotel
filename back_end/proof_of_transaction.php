@@ -55,7 +55,7 @@ if(isset($_POST['proof_of_transaction'])){
                     <div class="col-md-7 position-relative">
                         <div class="shadow-sm p-3 mb-5 bg-body rounded">
                             <label for="exampleDataList" class="form-label">Search fucking bank</label>
-                                <input class="form-control" list="datalistOptions" id="exampleDataList" placeholder="Select Bank">
+                                <input class="form-control" list="datalistOptions" id="exampleDataList" name="bank" placeholder="Select Bank">
                                     <datalist id="datalistOptions">
                                     <option value="BDO">BDO Unibank Inc.</option>
                                     <option value="Metro bank">Metropolitan Bank and Trust Company</option>
@@ -86,9 +86,9 @@ if(isset($_POST['proof_of_transaction'])){
                         <div class="col-md-10 position-relative">
                     
                             <div class="col-md-12  align-items-center" style="padding-top: 10%; padding-left: 60%; " >
-                                <button type="button" class="btn btn-primary" name="payment" value="Pay">Pay</button>
-                               
-                                <button type="button" class="btn btn-danger">Cancel</button>
+                                
+                                <input type="submit" name="payment" class="btn btn-primary" value="Pay">
+                                <a type="button" href="home.php" class="btn btn-danger">Cancel</a>
                         
                                
                             </div>
@@ -185,10 +185,8 @@ if(isset($_POST['payment'])){
     move_uploaded_file($_FILES["image_transaction"]["tmp_name"], "receipt/" . $_FILES["image_transaction"] ["name"]);
 
     if($run_insert){
-        echo "added receipt" . " your receipt is pending, wait for transaction ";
-        //DD, ERD, SWAL 
-        //dapat mareredirect sa home page. 
-        // pano kami gagawa ng notification kapag okay na? email? 
+        echo "<script>alert('Your Transaction Sent, please wait for confirmation on Email Thank you ') </script>";
+        echo "<script>window.location.href='home.php' </script>";
     }else{
         echo "error". $conn->error;
     }

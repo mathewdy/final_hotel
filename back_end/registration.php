@@ -214,7 +214,7 @@ if(isset($_POST['register'])){
     $run_validate = mysqli_query($conn,$validate);
     if($run_validate){
         if(mysqli_num_rows($run_validate) > 0){
-            echo  "email already use";
+            echo  "<script>alert('Email already used') </script>";
           exit();
         }
     }
@@ -222,7 +222,7 @@ if(isset($_POST['register'])){
     $validate_id = "SELECT * FROM id_info WHERE number='$id_number'";
     $run_validate_id = mysqli_query($conn,$validate_id);
     if(mysqli_num_rows($run_validate_id) > 0){
-        echo "id already used";
+        echo "<script>alert('Id already used') </script>";
         exit();
     }
 
@@ -232,7 +232,6 @@ if(isset($_POST['register'])){
     $run_insert = mysqli_query ($conn,$query_insert);
 
     if($run_insert){
-        echo "added user" . '<br>';
         $insert_id_fk = $conn->insert_id;
         $query_fk = "INSERT INTO id_info (id_type,number,image,users_id,added_on)
         VALUES('$id_type', '$id_number', '$id_image','$insert_id_fk', '$added_on')";
@@ -240,7 +239,7 @@ if(isset($_POST['register'])){
         $run_fk = mysqli_query($conn,$query_fk) && sendMail($email,$vcode,$account_id);
 
         if($run_fk){
-            echo "added users";
+            echo "<script>alert('Registration Successful') </script>";
         }else{
             echo "error" . $conn->error;
         }

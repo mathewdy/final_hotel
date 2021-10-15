@@ -118,8 +118,8 @@ if(isset($_POST['review_details'])){
             </div>
             <div class="col-lg-12 col-md-12 mb-4 border-bottom">
                 <span class="hstack gap-2">
-                    <h3 class="fw-thin">Description :</h3>
-                    <input class="form-control-plaintext w-50" type="text" name="description" value="<?php echo $description?>" readonly>
+                    <h3 class="fw-thin w-50">Description :</h3>
+                    <input class="form-control-plaintext" type="text" name="description" value="<?php echo $description?>" readonly>
                     </span>
             </div>
             
