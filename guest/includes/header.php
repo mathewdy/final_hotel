@@ -1,3 +1,8 @@
+<?php
+include "../connection.php";
+session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -51,7 +56,7 @@
                                     <label class="form-label" for="form2Example27">Account ID</label>
                                 </div>
                                 <div class="pt-1 mb-4">
-                                    <a class="btn btn-dark btn-lg btn-block w-100" href="home.php" type="submit">Sign-in</a>
+                                    <a class="btn btn-dark btn-lg btn-block w-100" href="../back_end/home.php" type="submit">Sign-in</a>
                                 </div>
                                 <p class="small mb-5 pb-lg-2"><a class="text-muted" href="#!">Forgot password?</a></p>
                                 <p>Don't have an account? <a href="../back_end/registration.php" class="link-info">Register here</a></p>

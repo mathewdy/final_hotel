@@ -1,7 +1,7 @@
 <?php
 
 include('../connection.php');
-include('./includes/header.php');
+include('includes/header.php');
 
 
 $id = $_SESSION['id'];
@@ -49,15 +49,14 @@ $id = $_SESSION['id'];
             <td><?php echo $row ['added_on']?></td>
         </tr>
     </tbody>
-    </table>
-
                 <?php
             }
         }else{
             echo "No transactions yet";
         }
     }
-    ?>
+    ?>  
+    </table>
 </div>
 <div class="container p-lg-5">
 <p class="lead display-3 text-muted">Current Transaction</p>
@@ -95,7 +94,7 @@ $id = $_SESSION['id'];
                     <td><?php echo $row ['status']?></td>
                 </tr>
             </tbody>
-        </table>
+        
 
                 <?php
             }
@@ -103,8 +102,9 @@ $id = $_SESSION['id'];
     }
 
     ?>
+    </table>
 </div>
 </div>
 <?php
-include('./includes/footer.php');
+include('includes/footer.php');
 ?>
