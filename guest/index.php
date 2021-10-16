@@ -91,7 +91,7 @@ include "./includes/header.php";
                                                         </div>                                         
                                                     </div>
                                             </div>                                          
-                                            <a href="executive.php" class="btn btn-dark" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal" data-bs-dismiss="modal">Book Now</a>
+                                            <a href="economy.php" class="btn btn-dark">Book Now</a>
                                             </div>
                                         </div>
                             </div>
@@ -153,7 +153,7 @@ include "./includes/header.php";
                                                         </div>                                         
                                                     </div>
                                             </div>                                          
-                                            <a href="executive.php" class="btn btn-dark" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal" data-bs-dismiss="modal">Book Now</a>
+                                            <a href="deluxe.php" class="btn btn-dark">Book Now</a>
                                             </div>
                                         </div>
                             </div>
@@ -218,7 +218,7 @@ include "./includes/header.php";
                                                         </div>                                         
                                                     </div>
                                             </div>                                          
-                                            <a href="executive.php" class="btn btn-dark" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal" data-bs-dismiss="modal">Book Now</a>
+                                            <a href="executive.php" class="btn btn-dark">Book Now</a>
                                             </div>
                                         </div>
                             </div>
