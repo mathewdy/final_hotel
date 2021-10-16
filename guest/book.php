@@ -1,8 +1,5 @@
 <?php
 ob_start();
-if(empty($_SESSION['email'])){
-  echo "<script>window.location.href='../guest/index.php' </script>";
-}
 
 include "email_status.php";
 include "../connection.php";
