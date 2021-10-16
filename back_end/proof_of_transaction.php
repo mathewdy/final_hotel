@@ -4,6 +4,9 @@
 
 include('../connection.php');
 include('./includes/header.php');
+if(empty($_SESSION['email'])){
+    echo "<script>window.location.href='../guest/index.php' </script>";
+  }
 
 if(isset($_POST['proof_of_transaction'])){
     $id = $_POST['id'];

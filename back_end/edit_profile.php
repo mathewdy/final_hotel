@@ -3,6 +3,9 @@
 session_start();
 include('../connection.php');
 
+if(empty($_SESSION['email'])){
+    echo "<script>window.location.href='../guest/index.php' </script>";
+  }
 ?>
 <!DOCTYPE html>
 <html lang="en">

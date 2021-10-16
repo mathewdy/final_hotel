@@ -45,7 +45,7 @@ session_start();
                         </div>
                         <div class="modal-body">
                         <div class="d-flex justify-content-center align-items-center ">
-                                <form action="back_end/login.php" method="POST">
+                                <form action="../back_end/login.php" method="POST">
                                 <h3 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Log in</h3>
                                 <div class="form-outline mb-4">
                                     <input type="email" name="email" id="form2Example17" class="form-control form-control-lg" />
@@ -56,7 +56,7 @@ session_start();
                                     <label class="form-label" for="form2Example27">Account ID</label>
                                 </div>
                                 <div class="pt-1 mb-4">
-                                    <a class="btn btn-dark btn-lg btn-block w-100" href="../back_end/home.php" type="submit">Sign-in</a>
+                                   <input type="submit" name="login" value="Log In">
                                 </div>
                                 <p class="small mb-5 pb-lg-2"><a class="text-muted" href="#!">Forgot password?</a></p>
                                 <p>Don't have an account? <a href="../back_end/registration.php" class="link-info">Register here</a></p>

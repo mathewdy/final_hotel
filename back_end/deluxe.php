@@ -3,6 +3,9 @@
 include('../connection.php');
 include('./includes/header.php');
 
+if(empty($_SESSION['email'])){
+    echo "<script>window.location.href='../guest/index.php' </script>";
+  }
 ?>
 
 <div class="container mt-0 p-xxl-3">

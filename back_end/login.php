@@ -12,14 +12,7 @@ session_start();
 </head>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <body>
-    <form action="login.php" method="POST">
-        <label for="">Account Id</label>
-        <input type="text" name="account_id">
-        <label for="">Email</label>
-        <input type="email" name="email">
-        <input type="submit" name="login">
-    </form>
-    <a href="registration.php">Register</a>
+   
 </body>
 </html>
 

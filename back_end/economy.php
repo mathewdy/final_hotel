@@ -3,6 +3,9 @@
 include('../connection.php');
 include('./includes/header.php');
 
+if(empty($_SESSION['email'])){
+    echo "<script>window.location.href='../guest/index.php' </script>";
+  }
 ?>
 <div class="container mt-0 p-xxl-3">
 <a href="home.php" class="btn btn-dark mb-2"> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-left-fill" viewBox="0 0 16 16">

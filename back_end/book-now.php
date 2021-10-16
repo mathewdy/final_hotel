@@ -10,9 +10,10 @@ if(isset($_GET['id'])){
     $room_number = $_GET['id'];
     
 }
+
 if(empty($_SESSION['email'])){
-    echo "<script> window.location.href='login.php'</script>";
-}
+    echo "<script>window.location.href='../guest/index.php' </script>";
+  }
 
 
 ?>

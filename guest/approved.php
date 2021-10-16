@@ -1,6 +1,7 @@
 <?php
 include "email_status.php";
 include "../connection.php";
+
 if(isset($_GET['id']) && isset($_GET['uid']) && isset($_GET['g']) && isset($_GET['in']) && isset($_GET['out'])){
   $room_id = $_GET['id'];
   $user_id = $_GET['uid'];
