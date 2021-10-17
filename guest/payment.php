@@ -171,11 +171,20 @@ include "./includes/header.php";
 </script>
 </html>
 <?php 
+
+
   if(isset($_POST['pay'])){
+
+
     $bank_type = $_POST['bank'];
     $image_transaction = $_FILES['image_transaction']['name'];
     $transaction_status = "pending";
     $payment_method = "bank";
+
+    if(empty($bank_type) || empty($image_transaction)){
+      echo "input something";
+      exit();
+    }
 
     date_default_timezone_set('Asia/Manila');
     $added_on = date("Y-m-d H:i:s");
