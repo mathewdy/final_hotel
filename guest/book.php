@@ -72,20 +72,23 @@ if(isset($_GET['b']) && isset($_GET['id'])){
 <div class="container mt=0 pt-0 pb-5">
   <p class="display-3 lead text-muted pt-0 mt-0">Fill up Form</p>
   <hr class="featurette-divider">
-  <form action="" method="POST" enctype="multipart/form-data">
+  <form action="" method="POST" enctype="multipart/form-data" onsubmit="return myfunc()">
     <input class="form-control" type="text" name="first_name" placeholder="First name"><br>
     <input class="form-control" type="text" name="last_name" placeholder="Last name"><br>
     <input class="form-control" type="email" name="email" placeholder="Email"><br>
-    <input class="form-control" type="number" name="mobile_number" placeholder="Mobile #"><br>
+    <span id="errors" style="color: red;"></span>
+    <input class="form-control" type="text" name="mobile_number" id="mobile_num" placeholder="Mobile #"><br>
+    
     <input class="form-control" type="number" name="guest" placeholder="No. of guest"><br>
     <select class="form-select" name="id_type" id="">
             <option value="">-Select ID-</option>
-            <option value="1">SSS</option>
-            <option value="2">UMID</option>
-            <option value="3">Driver`s License</option>
-            <option value="4">Professional ID</option>
+            <option id="sss" value="1">SSS</option>
+            <option id="umid" value="2">UMID</option>
+            <option id="dl" value="3">Driver`s License</option>
+            <option id="pro_id" value="4">Professional ID</option>
         </select><br>
-    <input class="form-control" type="number" name="id_number" placeholder="ID Number"><br>
+    
+    <input class="form-control" type="number" id="id_number" name="id_number" placeholder="ID Number"><br>
     <input class="form-control" type="file" name="id_image" id="id_image"><br>
     <p class="lead text-muted mb-0">Check in</p>
     <span class="hstack">
@@ -105,6 +108,44 @@ if(isset($_GET['b']) && isset($_GET['id'])){
     </form>
 </div>
 <div class="container">
+
+  <script>
+    function myfunc(){
+    var a = document.getElementById("mobile_num").value;
+  
+    if((a.charAt(0)!= '+' )){
+    document.getElementById("errors").innerHTML = "start with + ";
+    return false;
+    }
+    if(a.charAt(1)!= '6'){
+      document.getElementById("errors").innerHTML = " use international phone format";
+    return false;
+    }
+    if(a.charAt(2)!= '3'){
+      document.getElementById("errors").innerHTML = "start with + ";
+    return false;
+    }
+    if(isNaN(a)){
+      document.getElementById("errors").innerHTML = "numbers only";
+      return false;
+    }
+    if(a.length > 13){
+      document.getElementById("errors").innerHTML = "13 numbers only";
+      return false;
+    }
+    if(a.length < 13){
+      document.getElementById("errors").innerHTML = "13 numbers only";
+      return false;
+    }
+
+    else{
+    document.getElementById("errors").innerHTML = "nice";
+    }
+
+  }
+
+   
+  </script>
 
 
     <?php 
@@ -216,6 +257,8 @@ if(isset($_POST['request_book'])){
   $check_out = $_POST['check_out'];
   $time_out = $_POST['time_out'];
   $time_out = date("H:i:s", strtotime($time_out));
+
+  
   
   $time_in_format = "".$check_in." ".$time_in."";
   $time_out_format = "".$check_out." ".$time_out."";

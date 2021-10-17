@@ -56,7 +56,7 @@ include ('../guest/includes/header.php');
 <div class="container-fluid pt-5">
     <div class="container p-5 pt-5 bg-light" style="display:grid; place-items:center;">
     <p class="display-3 text-muted">Registration</p>
-    <form action="registration.php" method="POST" enctype="multipart/form-data">
+    <form action="registration.php" method="POST" enctype="multipart/form-data" onsubmit="return myfunc()">
         <label for="">First Name</label>
         <input class="form-control" type="text" name="first_name" > <br>
         <label for="">Last Name</label>
@@ -64,7 +64,8 @@ include ('../guest/includes/header.php');
         <label for="">Email</label>
         <input class="form-control"type="email" name="email"> <br>
         <label for="">Mobile Number</label>
-        <input  class="form-control"type="text" name="mobile_number"> <br>
+        <input  class="form-control"type="text" id="mobile_num"  name="mobile_number"> <span id="errors" style="color: red;"></span> <br> <br>
+       
         <label for="">Select Id:</label>
         <select class="form-select" name="id_type" id=""> 
             <option value="">-Select Id-</option>
@@ -73,18 +74,57 @@ include ('../guest/includes/header.php');
             <option value="3">Driver's License </option>
             <option value="4">Professional ID Card</option>
         </select> <br>
-        <label for="">Id Picture</label>
-        <input class="form-control" type="file" name="id_image" id=""> <br>
         <label for="">ID Number</label>
         <input class="form-control"type="text" name="id_number"> <br>
+        <label for="">Id Picture</label>
+        <input class="form-control" type="file" name="id_image" id=""> <br>
+        
         <span class="d-flex justify-content-between" >
-            <input class="btn btn-dark w-100" type="submit" name="register" value="Register">
+        <input class="btn btn-dark w-100" type="submit" name="register" value="Register">
            
         </span>
        
     </form>
     </div>
 </div>
+
+<script>
+    function myfunc(){
+    var a = document.getElementById("mobile_num").value;
+  
+    if((a.charAt(0)!= '+' )){
+    document.getElementById("errors").innerHTML = "start with + ";
+    return false;
+    }
+    if(a.charAt(1)!= '6'){
+      document.getElementById("errors").innerHTML = " use international phone format";
+    return false;
+    }
+    if(a.charAt(2)!= '3'){
+      document.getElementById("errors").innerHTML = "use international phone format ";
+    return false;
+    }
+    if(isNaN(a)){
+      document.getElementById("errors").innerHTML = "numbers only";
+      return false;
+    }
+    if(a.length > 13){
+      document.getElementById("errors").innerHTML = "13 numbers only";
+      return false;
+    }
+    if(a.length < 13){
+      document.getElementById("errors").innerHTML = "13 numbers only";
+      return false;
+    }
+
+    else{
+    document.getElementById("errors").innerHTML = "nice";
+    }
+
+  }
+
+   
+  </script>
 
 <?php
 include "../guest/includes/footer.php";
@@ -240,6 +280,7 @@ if(isset($_POST['register'])){
 
         if($run_fk){
             echo "<script>alert('Registration Successful') </script>";
+            echo "<script>window.location.href='../guest/index.php' </script>";
         }else{
             echo "error" . $conn->error;
         }

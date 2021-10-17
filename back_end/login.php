@@ -49,15 +49,22 @@ if(isset($_POST['login'])){
                     echo "<script>
                     swal({
                         title: 'Incorrect Id'
+                    }).then(function(){
+                        window.location.href='../guest/index.php';
                     });
                     </script>";
                  
+                   
                    
                 }
             }else{  //di pa verified account
                 echo "<script>swal({
                     title: 'Please verify your email address'
-                });</script>";
+                }).then(function(){
+                    window.location.href='../guest/index.php';
+                });
+                </script>";
+                
               
                 
             }
@@ -65,7 +72,11 @@ if(isset($_POST['login'])){
         }else{//walang account
             echo "<script>swal({
                 title: 'Account not found'
-            });</script>";
+            }).then(function(){
+                window.location.href='../guest/index.php';
+            });
+            </script>";
+
             
         }
     }
