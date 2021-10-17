@@ -71,7 +71,7 @@ function sendPDF($send_pdf, $email, $full_name){
         $mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
     
         //Recipients
-        $mail->setFrom('cmdyzxcvbnm123@gmail.com', 'Hotel De Luna');
+        $mail->setFrom('cmdyzxcvbnm123@gmail.com', 'ProCreation');
         $mail->addAddress($email);     //Add a recipient
         //add pdf attachment
         $mail->addStringAttachment($send_pdf,'Hotel Receipt.pdf');
@@ -79,8 +79,8 @@ function sendPDF($send_pdf, $email, $full_name){
         $mail->isHTML(true);
         
         //Set email format to HTML
-        $mail->Subject = 'Book Receipt from Hotel De Luna ';
-        $mail->Body = "<span style=font-size:18px;letter-spacing:0.5px;color:black;>Good day <b>$full_name</b>!</span><br><span style=font-size:15px;letter-spacing:0.5px;color:black;>Below of this message is your receipt please print it out before entering in our fucking hotel u shit motherfucker!</span>";
+        $mail->Subject = 'Book Receipt from ProCreation ';
+        $mail->Body = "<span style=font-size:18px;letter-spacing:0.5px;color:black;>Good day <b>$full_name</b>!</span><br><span style=font-size:15px;letter-spacing:0.5px;color:black;>Below of this message is your receipt please print it out before entering in our hotel</span>";
     
     
         $mail->send();

@@ -11,15 +11,13 @@ if(isset($_GET['id']) && isset($_GET['uid']) && isset($_GET['g']) && isset($_GET
   $check_out = $_GET['out'];
   if(empty($room_id) && empty($user_id) && empty($guest) && empty($check_in) && $check_out){
     echo "<script>alert('tanga')</script>";
-    header("Location:index.php");
-    exit();
+   
   }else{
     $check_account = "SELECT id FROM users WHERE id = '$user_id'";
     $query_check = mysqli_query($conn, $check_account);
-    if(mysqli_num_rows($query_check) == 0){
+    if(mysqli_num_rows($query_check) < 0){
       echo "<script>alert('engot')</script>";
-      header("location:index.php");
-      exit();
+     
     }
   }
 }else{
