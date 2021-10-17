@@ -2,12 +2,13 @@
 include "email_status.php";
 include "../connection.php";
 
-if(isset($_GET['id']) && isset($_GET['uid']) && isset($_GET['g']) && isset($_GET['in']) && isset($_GET['out'])){
+if(isset($_GET['id']) && isset($_GET['uid']) && isset($_GET['g']) && isset($_GET['in']) && isset($_GET['out']) && isset($_GET['mobile_number'])){
   $room_id = $_GET['id'];
   $user_id = $_GET['uid'];
   $guest = $_GET['g'];
   $check_in = $_GET['in'];
   $check_out = $_GET['out'];
+  $mobile_number = $_GET['mobile_number'];
 
   $date_in = date("Y-m-d", strtotime($check_in));
   $time_in = date("h:i A", strtotime($check_in));

@@ -40,6 +40,12 @@ include "../connection.php";
     $in = strtotime($check_in);
     $out = strtotime($check_out);
 
+    $sql_user = "SELECT mobile_number FROM users WHERE id = '$user_id'";
+    $query_user = mysqli_query($conn, $sql_user);
+    $ROWS = mysqli_fetch_array($query_user);
+    $mobile_number = $ROWS['mobile_number'];
+
+
     $sql = "SELECT rooms.room_number, room_types.name_of_room, room_types.price FROM rooms
     LEFT JOIN room_types ON rooms.room_type_id = room_types.id WHERE rooms.id = '$room_id'";
     $query = mysqli_query($conn, $sql);
@@ -148,7 +154,7 @@ include "../connection.php";
         return actions.order.capture().then(function(details){
             console.log(details)
             
-            window.location.replace("http://localhost/final_hotel/guest/approved.php?id=<?php echo $room_id?>&uid=<?php echo $user_id?>&g=<?php echo $guest?>&in=<?php echo $check_in?>&out=<?php echo $check_out?>")
+            window.location.replace("http://localhost/final_hotel/guest/approved.php?id=<?php echo $room_id?>&uid=<?php echo $user_id?>&g=<?php echo $guest?>&in=<?php echo $check_in?>&out=<?php echo $check_out?>&mobile_number=<?php echo $mobile_number?>")
 
         })
     }
