@@ -147,22 +147,13 @@
         <td><?php echo $rows['room_number']?></td>
         <td><?php echo $rows['check_in']?></td>
         <td><?php echo $rows['check_out']?></td>
-        <td> <?php echo $rows['bank']?></td>
-        <td> <?php echo ucwords($rows['status'])?></td>
+        <td><?php echo $rows['bank']?></td>
+        <td><?php echo ucwords($rows['status'])?></td>
         <td><a href="" data-bs-toggle="modal" data-bs-target="#exampleModal">View Image</a></td>
-        <td> <?php echo $rows['added_on']?></td>
-        <td> <a href="pending.php?p&id=<?php echo $rows['id']?>&rid=<?php echo $rows['room_id']?>">Confirm</a><br></td>
-        <form action="" method="POST">
-        <td>
-          <input type="submit" name="delete" value="Delete">
-          <input type="hidden" name="delete_id" value="<?php echo $rows['id']?>">
-          <input type="hidden"name="email" value="<?php echo $rows ['email']?>">
-          <input type="hidden" name="last_name" value="<?php echo $rows['last_name']?>">
-          <input type="hidden" name="account_id" value="<?php echo $rows['account_id']?>">
-          <input type="text" name="users_id" value="<?php echo $rows ['users_id']?>">
-         
+        <td><?php echo $rows['added_on']?></td>
+        <td><a href="pending.php?p&id=<?php echo $rows['id']?>&rid=<?php echo $rows['room_id']?>">Confirm</a>
+        <a href="pending.php?d&id=<?php echo $rows['id']?>&rid=<?php echo $rows['room_id']?>">Delete</a>
         </td>
-        </form>
       </tr>
     </tbody>
       <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -243,16 +234,13 @@ echo NULL;
 
 <?php
 
-if(isset($_POST['delete'])){
-  $id = $_POST['delete_id'];
-  $email = $_POST['email'];
-  $last_name = $_POST['last_name'];
-  $account_id = $_POST['account_id'];
-  $users_id = $_POST['users_id'];
+if(isset($_GET['d']) && isset($_GET['id']) && isset($_GET['rid'])){
+  $user_id = $_GET['id'];
+  $room_id = $_GET['rid'];
   
 
-  $query_delete = "DELETE FROM transactions WHERE users_id='$users_id'";
-  $run_delete = mysqli_query($conn,$query_delete) && send_error($email, $last_name, $account_id);
+  $query_delete = "DELETE FROM transactions WHERE users_id = '$user_id' AND room_id = '$room_id'";
+  $run_delete = mysqli_query($conn,$query_delete);
 
   if($run_delete){
      echo '<script>swal({
@@ -262,7 +250,7 @@ if(isset($_POST['delete'])){
       }).then(function() {
       // Redirect the user
       window.location.href="pending.php";
-  });</script>';
+      });</script>';
 
 
   }else{

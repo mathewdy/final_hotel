@@ -137,7 +137,7 @@ include "./includes/header.php";
     <?php echo "error"?>
   <?php }?>
 
-
+<script src="../js/bootstrap.js"></script>
 </body>
 
 
@@ -182,18 +182,25 @@ include "./includes/header.php";
     $payment_method = "bank";
 
     if(empty($bank_type) || empty($image_transaction)){
-      echo "input something";
-      exit();
+      echo "<script>swal({
+        title: 'Oops invalid request!',
+        text: 'Please input the required field',
+        icon: 'warning',
+        }).then(function() {
+        // Redirect the user
+        window.location.href='payment.php?other&id=$room_id&uid=$user_id&g=$guest&in=$check_in&out=$check_out';
+        });</script>";
+        exit();
     }
 
     date_default_timezone_set('Asia/Manila');
     $added_on = date("Y-m-d H:i:s");
-//may swal dito tangina mo hahaha
-  $allowed_extension = array('png' , 'jpeg', 'jpg' , 'PNG' , 'JPEG' , 'JPG');
-  $filename = $image_transaction;
-  $file_extension = pathinfo($filename , PATHINFO_EXTENSION);
-  if(!in_array($file_extension, $allowed_extension)){
-    echo "<script>swal({
+    //may swal dito tangina mo hahaha
+    $allowed_extension = array('png' , 'jpeg', 'jpg' , 'PNG' , 'JPEG' , 'JPG');
+    $filename = $image_transaction;
+    $file_extension = pathinfo($filename , PATHINFO_EXTENSION);
+    if(!in_array($file_extension, $allowed_extension)){
+      echo "<script>swal({
       title: 'Oops invalid request!',
       text: 'Invalid image format',
       icon: 'warning',
@@ -201,6 +208,7 @@ include "./includes/header.php";
       // Redirect the user
       window.location.href='payment.php?other&id=$room_id&uid=$user_id&g=$guest&in=$check_in&out=$check_out';
       });</script>";
+      exit();
   }
 
   $sql_insert = "INSERT INTO transactions (`room_id`, `users_id`, `guest`, `check_in`, `check_out`, `added_on`, `status`, `payment_method`, `image`, `bank`) VALUES ('$room_id', '$user_id', '$guest', '$check_in', '$check_out', '$added_on', '$transaction_status', '$payment_method', '$image_transaction', '$bank_type')";
@@ -215,6 +223,7 @@ include "./includes/header.php";
       // Redirect the user
       window.location.href='index.php';
       });</script>";
+      exit();
   }else{
     echo "<script>swal({
       title: 'Oops invalid request!',
@@ -224,6 +233,7 @@ include "./includes/header.php";
       // Redirect the user
       window.location.href='payment.php?other&id=$room_id&uid=$user_id&g=$guest&in=$check_in&out=$check_out';
       });</script>";
+      exit();
   }
 
 }
