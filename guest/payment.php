@@ -188,7 +188,7 @@ include "./includes/header.php";
 
     date_default_timezone_set('Asia/Manila');
     $added_on = date("Y-m-d H:i:s");
-
+//may swal dito tangina mo hahaha
   $allowed_extension = array('png' , 'jpeg', 'jpg' , 'PNG' , 'JPEG' , 'JPG');
   $filename = $image_transaction;
   $file_extension = pathinfo($filename , PATHINFO_EXTENSION);
