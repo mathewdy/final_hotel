@@ -60,9 +60,9 @@ session_start();
                                     <label class="form-label" for="form2Example27">Account ID</label>
                                 </div>
                                 <div class="pt-1 mb-4">
-                                   <input type="submit" name="login" value="Log In">
+                                   <input type="submit" name="login" value="Log In" class="btn btn-outline-dark " style="width: 300px;">
                                 </div>
-                                <p class="small mb-5 pb-lg-2"><a class="text-muted" href="#!">Forgot password?</a></p>
+                               
                                 <p>Don't have an account? <a href="../back_end/registration.php" class="link-info">Register here</a></p>
                                 </form>
                         </div>                                         
