@@ -1,7 +1,9 @@
 <?php 
+  session_start();
   include("../connection.php");
   include("./includes/header.php");
-  session_start();
+  require('../back_end/fpdf184/fpdf.php');
+  require_once __DIR__.'/vendor/autoload.php';
   if(empty($_SESSION['username']) && empty($_SESSION['password'])){
       header("Location:index.php");
       exit();
@@ -193,6 +195,10 @@ if(isset($_GET['p']) && isset($_GET['id']) && isset($_GET['rid'])){
       $first_name = ucwords($rows['first_name']);
       $last_name = ucwords($rows['last_name']);
       $full_name = "".$first_name." ".$last_name."";
+      $date_in = date('Y-m-d', strtotime($rows['check_in']));
+      $time_in = date('h:i A', strtotime($rows['check_in']));
+      $date_out = date('Y-m-d', strtotime($rows['check_out']));
+      $time_out = date('h:i A', strtotime($rows['check_out']));
       $chck_in = strtotime($rows['check_in']);
       $chck_out = strtotime($rows['check_out']);
 
@@ -206,7 +212,6 @@ if(isset($_GET['p']) && isset($_GET['id']) && isset($_GET['rid'])){
         $sub_total = $days * $price;
         $total = $sub_total + $tax;
 
-      require('../back_end/fpdf184/fpdf.php');
       // Format ng pag gawa ng pdf
       // Cell(width, height, 'text', border(boolean to 1 & 0 lang), new line,'text align')
       
@@ -292,6 +297,12 @@ if(isset($_GET['p']) && isset($_GET['id']) && isset($_GET['rid'])){
       $update_status = "UPDATE transactions SET `status` = '$status' WHERE users_id = '$user_id' AND room_id = '$room_id'";
       $query_change = mysqli_query($conn, $update_status) && sendPDF($send_pdf, $email, $full_name, $account_id);
       if($query_change){
+        $messagebird = new MessageBird\Client('lOqKZbcRRoneYyBvujEJrLsS8');
+        $message = new MessageBird\Objects\Message;
+        $message->originator = '+639156915704';
+        $message->recipients = $mobile_number;
+        $message->body = "Dear Mr/Mrs: $last_name, we would like you to inform your reservation from ProCreations is from $date_in $time_in to $date_out $time_out. Please check your email to inbox/spam, thank you.";
+        $response = $messagebird->messages->create($message);
         echo '<script>swal({
           title: "Update Success!",
           text: "Status has been change!",
