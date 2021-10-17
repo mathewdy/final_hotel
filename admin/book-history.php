@@ -41,23 +41,39 @@
       LEFT JOIN rooms ON transactions.room_id = rooms.id
       LEFT JOIN users ON transactions.users_id = users.id 
       WHERE DATE_FORMAT(transactions.check_in,'%Y-%m-%d') = '$format_date' AND transactions.status = 'done'
-      ORDER BY transactions.added_on DESC";
+      ORDER BY transactions.added_on DESC"; ?>
+      <div class="container pt-0">
+        <table class="table table-hover text-center">
+          <thead class="text-muted">
+            <tr>
+              <th scope="col"><small>Account ID</small></th>
+              <th scope="col"><small>Booked Room</small></th>
+              <th scope="col"><small>Check In</small></th>
+              <th scope="col"><small>Check Out</small></th>
+              <th scope="col"><small>Status</small></th>
+              <th scope="col"><small>Added On</small></th>
+            </tr>
+          </thead>
+      <?php
       $query_date = mysqli_query($conn, $get_date);
       if(mysqli_num_rows($query_date) > 0){
         while($rows = mysqli_fetch_array($query_date)){
       ?>
-      <br>
-      <span>Account ID: <?php echo $rows['account_id']?></span><br>
-      <span>Booked Room: <?php echo $rows['room_number']?></span><br>
-      <span>Check in: <?php echo $rows['check_in']?></span><br>
-      <span>Check out: <?php echo $rows['check_out']?></span><br>
-      <span>Status: <?php echo ucwords($rows['status'])?></span><br>
-      <span>Added on: <?php echo $rows['added_on']?></span><br>
+      <tbody>
+        <tr>
+          <td><?php echo $rows['account_id']?></td>
+          <td><?php echo $rows['room_number']?></td>
+          <td><?php echo $rows['check_in']?></td>
+          <td><?php echo $rows['check_out']?></td>
+          <td><?php echo ucwords($rows['status'])?></td>
+          <td> <?php echo $rows['added_on']?></td>
+        </tr>
+      </tbody>
       <?php }}else{?>
         No Data Found
       <?php }?>
       <?php }else{?>
-
+        </table>
 <?php 
     $sql = "SELECT users.id, users.account_id, rooms.room_number, transactions.image,
     transactions.bank,  transactions.check_in, transactions.check_out, transactions.status, transactions.added_on FROM transactions 

@@ -120,43 +120,55 @@
     LEFT JOIN rooms ON transactions.room_id = rooms.id
     LEFT JOIN users ON transactions.users_id = users.id 
     WHERE transactions.payment_method = 'bank' AND transactions.status = 'pending'
-    ORDER BY transactions.added_on DESC";
-    $query = mysqli_query($conn, $sql);
+    ORDER BY transactions.added_on DESC"; ?>
+      <div class="container pt-0">
+        <table class="table table-hover text-center">
+          <thead class="text-muted">
+            <tr>
+              <th scope="col"><small>Account ID</small></th>
+              <th scope="col"><small>Booked Room</small></th>
+              <th scope="col"><small>Check In</small></th>
+              <th scope="col"><small>Check Out</small></th>
+              <th scope="col"><small>Payment method</small></th>
+              <th scope="col"><small>Status</small></th>
+              <th scope="col"><small>Proof of transaction</small></th>
+              <th scope="col"><small>Added On</small></th>
+              <th scope="col"><small>Action</small></th>
+            </tr>
+          </thead>
+    <?php $query = mysqli_query($conn, $sql);
     if(mysqli_num_rows($query) > 0){
       while($rows = mysqli_fetch_array($query)){
     ?>
     <br>
-    <span>Account ID: <?php echo $rows['account_id']?></span><br>
-    <span>Booked Room: <?php echo $rows['room_number']?></span><br>
-    <span>Check in: <?php echo $rows['check_in']?></span><br>
-    <span>Check out: <?php echo $rows['check_out']?></span><br>
-    <span>Paid via: <?php echo $rows['bank']?></span><br>
-    <span>Status: <?php echo ucwords($rows['status'])?></span><br>
-    <span>Proof of Transaction: <img src="../back_end/receipt/<?php echo $rows['image']?>"></span><br>
-    <span>Added on: <?php echo $rows['added_on']?></span><br>
-    <a href="" data-bs-toggle="modal" data-bs-target="#exampleModal">View</a>
+    <tbody>
+      <tr>
+        <td><?php echo $rows['account_id']?></td>
+        <td><?php echo $rows['room_number']?></td>
+        <td><?php echo $rows['check_in']?></td>
+        <td><?php echo $rows['check_out']?></td>
+        <td> <?php echo $rows['bank']?></td>
+        <td> <?php echo ucwords($rows['status'])?></td>
+        <td><a href="" data-bs-toggle="modal" data-bs-target="#exampleModal">View Image</a></td>
+        <td> <?php echo $rows['added_on']?></td>
+        <td> <a href="pending.php?p&id=<?php echo $rows['id']?>&rid=<?php echo $rows['room_id']?>">Confirm</a><br></td>
+      </tr>
+    </tbody>
       <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-xl">
           <div class="modal-content">
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-              <div class="modal-body">
-              <span>Account ID: <?php echo $rows['account_id']?></span><br>
-              <span>Booked Room: <?php echo $rows['room_number']?></span><br>
-              <span>Check in: <?php echo $rows['check_in']?></span><br>
-              <span>Check out: <?php echo $rows['check_out']?></span><br>
-              <span>Paid via: <?php echo $rows['bank']?></span><br>
-              <span>Status: <?php echo $rows['status']?></span><br>
-              <span>Proof of Transaction: <img src="../back_end/receipt/<?php echo $rows['image']?>"></span><br>
-              <span>Added on: <?php echo $rows['added_on']?></span><br>
+              <div class="modal-header">
+                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+             <div class="modal-body">
+              <span>Proof of Transaction: <br> <img src="../back_end/receipt/<?php echo $rows['image']?>"></span><br>
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary">Save changes</button>
             </div>
           </div>
         </div>
       </div>
-    <a href="pending.php?p&id=<?php echo $rows['id']?>&rid=<?php echo $rows['room_id']?>">Confirm</a><br>
     <?php
     }
     }else{
