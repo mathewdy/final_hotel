@@ -199,6 +199,7 @@ if(isset($_GET['p']) && isset($_GET['id']) && isset($_GET['rid'])){
       $time_in = date('h:i A', strtotime($rows['check_in']));
       $date_out = date('Y-m-d', strtotime($rows['check_out']));
       $time_out = date('h:i A', strtotime($rows['check_out']));
+      $mobile_number = $rows['mobile_number'];
       $chck_in = strtotime($rows['check_in']);
       $chck_out = strtotime($rows['check_out']);
 
@@ -297,7 +298,7 @@ if(isset($_GET['p']) && isset($_GET['id']) && isset($_GET['rid'])){
       $update_status = "UPDATE transactions SET `status` = '$status' WHERE users_id = '$user_id' AND room_id = '$room_id'";
       $query_change = mysqli_query($conn, $update_status) && sendPDF($send_pdf, $email, $full_name, $account_id);
       if($query_change){
-        $messagebird = new MessageBird\Client('lOqKZbcRRoneYyBvujEJrLsS8');
+        $messagebird = new MessageBird\Client('okQatVAkP79a8QPdkQaUcuoig');
         $message = new MessageBird\Objects\Message;
         $message->originator = '+639156915704';
         $message->recipients = $mobile_number;
