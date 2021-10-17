@@ -1,5 +1,5 @@
 <?php
-//adadadadada
+// comment ko putanginanyo
 ob_start();
 
 include "email_status.php";
