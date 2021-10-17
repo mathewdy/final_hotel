@@ -386,8 +386,8 @@ if(isset($_POST['request_book'])){
               });</script>";
           }
         }else{
-         
-          $sql = "INSERT INTO users (account_id, first_name, last_name, email, email_status, v_code, mobile_number, added_on) VALUES ('$account_id', '$first_name', '$last_name', '$email', '$default_email_status', '$vcode', '$mobile_number', '$added_on')";
+        //  tangina
+          $sql = "INSERT INTO users (`account_id`, `first_name`, `last_name`, `email`, `email_status`, `v_code`, `mobile_number`, `added_on`) VALUES ('$account_id', '$first_name', '$last_name', '$email', '$default_email_status', '$vcode', '$mobile_number', '$added_on')";
           $query = mysqli_query ($conn,$sql) ;
 
           if($query){
