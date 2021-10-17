@@ -66,10 +66,10 @@ if(isset($_GET['b']) && isset($_GET['id'])){
 
    echo NULL;
    ?> 
-<div class="container d-flex">
+<div class="container p-lg-5 d-flex">
 
 
-<div class="container mt=0 pt-0">
+<div class="container mt=0 pt-0 pb-5">
   <p class="display-3 lead text-muted pt-0 mt-0">Fill up Form</p>
   <hr class="featurette-divider">
   <form action="" method="POST" enctype="multipart/form-data">

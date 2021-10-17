@@ -1,27 +1,8 @@
 <?php
 include "email_status.php";
 include "../connection.php";
-
+include "./includes/header.php";
 ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script src="https://www.paypal.com/sdk/js?client-id=AY39CmurvQ07z6GuahuonFH6v4pQlUMe8Zb9bib0nj7sS6FYCGm-M6HviIlJ5L2-iUb0HgATLDQWt27w"></script>
-  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-  
-
-  <title>Document</title>
-</head>
-<body>
-    <a href="index.php">Home</a>
-    <a href="rooms.php">Rooms</a>
-    <a href="economy.php">Economy</a>
-    <a href="deluxe.php">Deluxe</a>
-    <a href="executive.php">Executive</a>
-    <a href="">Sign in</a>
   <?php 
   if(isset($_GET['paypal']) && isset($_GET['id']) && isset($_GET['uid']) && isset($_GET['g']) && isset($_GET['in']) && isset($_GET['out'])){
     $room_id = $_GET['id'];
@@ -69,14 +50,22 @@ include "../connection.php";
       }
     }
     ?>
-    <h2>Payment Summary</h2>
-    <p>Room Type: <?php echo ucwords($rows['name_of_room'])?></p>
-    <p>Room Number: <?php echo $rows['room_number']?></p>
-    <p>No. of Guest/s: <?php echo $guest?></p>
-    <p>Day/s of Stay: <?php echo $days?></p>
-    <p>Price: <?php echo $total?></p>
-    <p></p>
-    <div id="paypal-payment-button"></div>
+    <div class="container px-lg-5">
+      
+      <h2 class="p-3 display-1 text-muted text-center">Payment Summary</h2>
+      <hr class="featurette-divider">
+      <div class="container pt-3 d-flex flex-column justify-content-center w-50">
+
+        <p >Room Type: <?php echo ucwords($rows['name_of_room'])?></p>
+        <p>Room Number: <?php echo $rows['room_number']?></p>
+        <p >No. of Guest/s: <?php echo $guest?></p>
+        <p>Day/s of Stay: <?php echo $days?></p>
+        <p class="pb-3">Price: <?php echo $total?></p>
+  
+        <div id="paypal-payment-button"></div>
+      </div>
+    </div>
+   
 
 
   <?php }else if(isset($_GET['other']) && isset($_GET['id']) && isset($_GET['uid']) && isset($_GET['g']) && isset($_GET['in']) && isset($_GET['out'])){
@@ -103,13 +92,25 @@ include "../connection.php";
     }
   }
   ?>
-    <h3>Bank Partners</h3>
-    <form action="#" method=POST enctype="multipart/form-data">
+  <div class="container">
+    <h3 class="display-1 text-muted text-center pb-0">Bank Partners</h3>
+    
+    <div class="container pt-3">
+      <hr class="featurette-divider">
 
+    
+    
+    <form action="#" method=POST enctype="multipart/form-data">
+        <div class="row pt-2">
+          <div class="col-6">
+
+
+
+          
         <label for="">Select Bank</label>
         <!---di pa to tapos--->
         <!---yung deposit slip dapat to -->
-        <select name="bank" id="">
+        <select class="form-select" name="bank" id="">
             <option value="">-Select-</option>
             <option value="BDO">BDO Unibank Inc.</option>
             <option value="Metro bank">Metropolitan Bank and Trust Company</option>
@@ -122,12 +123,16 @@ include "../connection.php";
             <option value="Union Bank">Union Bank of the Philippines</option>
             <option value="Rizal Bank">Rizal Commercial Banking and Corporation</option>
         </select>
-
+          </div>
+          <div class="col-6">
         <label for="">Upload Image</label>
-        <input type="file" name="image_transaction"><br>
-      <button type="submit" name="pay">Submit</button>
-    </form>
-
+        <input class="form-control" type="file" name="image_transaction"><br>
+    </div>
+        </div> 
+        <button class="btn btn-outline-dark" type="submit" name="pay">Submit</button>
+      </form>
+</div>
+  </div>
   <?php }else{?>
     <?php echo "error"?>
   <?php }?>
