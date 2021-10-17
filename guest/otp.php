@@ -2,6 +2,7 @@
 ob_start();
 include "email_status.php";
 include "../connection.php";
+include "./includes/header.php";
 
 if(isset($_GET['id']) && isset($_GET['uid']) && isset($_GET['g']) && isset($_GET['in']) && isset($_GET['out'])){
   $room_id = $_GET['id'];
@@ -26,16 +27,7 @@ if(isset($_GET['id']) && isset($_GET['uid']) && isset($_GET['g']) && isset($_GET
   echo "error";
 }
 ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script> 
-  <title>Document</title>
-</head>
-<body>
+
 <?php
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
@@ -83,19 +75,16 @@ function sendMail($last_name,$email,$vcode){
 
 echo NULL;
 ?> 
-    <a href="index.php">Home</a>
-    <a href="rooms.php">Rooms</a>
-    <a href="economy.php">Economy</a>
-    <a href="deluxe.php">Deluxe</a>
-    <a href="executive.php">Executive</a>
-    <a href="">Sign in</a>
- <h2>OTP CODE</h2>
- <p>We sent a verification code in your email</p>
+<div class="container p-lg-5" style="display: grid; place-items:center;">
+<h2>OTP CODE</h2>
+ <p class="text-muted">We sent a verification code in your email</p>
  <form action="" method="POST">
- <input type="number" name="otp_number">
- <button type="submit" name="check_otp">Submit</button>
- <button type="submit" name="resend_code">Resend Code</button>
+ <input class="form-control mb-4" type="number" name="otp_number">
+ <button class="btn btn-dark" type="submit" name="check_otp">Submit</button>
+ <button class="btn btn-outline-secondary" type="submit" name="resend_code">Resend Code</button>
  </form>
+</div>
+
 </body>
 </html>
 <?php
