@@ -2,7 +2,7 @@
 include "email_status.php";
 include "../connection.php";
 require_once __DIR__.'/vendor/autoload.php';
-
+// duwog duwog
 if(isset($_GET['id']) && isset($_GET['uid']) && isset($_GET['g']) && isset($_GET['in']) && isset($_GET['out']) && isset($_GET['mobile_number']) && isset($_GET['last_name'])){
   $room_id = $_GET['id'];
   $user_id = $_GET['uid'];
