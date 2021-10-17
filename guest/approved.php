@@ -2,13 +2,14 @@
 include "email_status.php";
 include "../connection.php";
 
-if(isset($_GET['id']) && isset($_GET['uid']) && isset($_GET['g']) && isset($_GET['in']) && isset($_GET['out']) && isset($_GET['mobile_number'])){
+if(isset($_GET['id']) && isset($_GET['uid']) && isset($_GET['g']) && isset($_GET['in']) && isset($_GET['out']) && isset($_GET['mobile_number']) && isset($_GET['last_name'])){
   $room_id = $_GET['id'];
   $user_id = $_GET['uid'];
   $guest = $_GET['g'];
   $check_in = $_GET['in'];
   $check_out = $_GET['out'];
   $mobile_number = $_GET['mobile_number'];
+  $last_name = $_GET['last_name'];
 
   $date_in = date("Y-m-d", strtotime($check_in));
   $time_in = date("h:i A", strtotime($check_in));
@@ -38,6 +39,21 @@ if(isset($_GET['id']) && isset($_GET['uid']) && isset($_GET['g']) && isset($_GET
 }else{
   echo "error";
 }
+
+?>
+
+<?php
+
+require_once __DIR__.'/vendor/autoload.php';
+
+$messagebird = new MessageBird\Client('lOqKZbcRRoneYyBvujEJrLsS8');
+$message = new MessageBird\Objects\Message;
+$message->originator = '+639156915704';
+$message->recipients = $mobile_number;
+$message->body = "Dear Mr/Mrs: $last_name, we would like you to inform your reservation from ProCreations is from $check_in to $check_out. Please check your email to inbox/spam, thank you.";
+$response = $messagebird->messages->create($message);
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
