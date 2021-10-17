@@ -115,7 +115,7 @@
       <?php }else{?>
     
 <?php 
-    $sql = "SELECT users.id, users.account_id, rooms.room_number, transactions.image,
+    $sql = "SELECT users.id, users.account_id, rooms.room_number, transactions.image,users.email,users.last_name,transactions.users_id,
     transactions.room_id, transactions.check_in, transactions.check_out, transactions.bank, transactions.status, transactions.added_on FROM transactions 
     LEFT JOIN rooms ON transactions.room_id = rooms.id
     LEFT JOIN users ON transactions.users_id = users.id 
@@ -152,6 +152,17 @@
         <td><a href="" data-bs-toggle="modal" data-bs-target="#exampleModal">View Image</a></td>
         <td> <?php echo $rows['added_on']?></td>
         <td> <a href="pending.php?p&id=<?php echo $rows['id']?>&rid=<?php echo $rows['room_id']?>">Confirm</a><br></td>
+        <form action="" method="POST">
+        <td>
+          <input type="submit" name="delete" value="Delete">
+          <input type="hidden" name="delete_id" value="<?php echo $rows['id']?>">
+          <input type="hidden"name="email" value="<?php echo $rows ['email']?>">
+          <input type="hidden" name="last_name" value="<?php echo $rows['last_name']?>">
+          <input type="hidden" name="account_id" value="<?php echo $rows['account_id']?>">
+          <input type="text" name="users_id" value="<?php echo $rows ['users_id']?>">
+         
+        </td>
+        </form>
       </tr>
     </tbody>
       <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -162,6 +173,7 @@
               </div>
              <div class="modal-body">
               <span>Proof of Transaction: <br> <img src="../back_end/receipt/<?php echo $rows['image']?>"></span><br>
+             
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -182,6 +194,87 @@
 <script src="../js/bootstrap.js"></script>
 </body>
 </html>
+
+<?php
+
+function send_error($email, $last_name, $account_id){
+    require ("PHPMailer.php");
+    require("SMTP.php");
+    require("Exception.php");
+
+    $mail = new PHPMailer(true);
+
+    try {
+        //Server settings
+       
+        $mail->isSMTP();                                            //Send using SMTP
+        $mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
+        $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
+        $mail->Username   = 'cmdyzxcvbnm123@gmail.com';                     //SMTP username
+        $mail->Password   = 'mathewpogi123';                               //SMTP password
+        $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
+        $mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+    
+        //Recipients
+        $mail->setFrom('cmdyzxcvbnm123@gmail.com', 'ProCreation');
+        $mail->addAddress($email);     //Add a recipient
+        //add pdf attachment//Content
+        $mail->isHTML(true);
+        
+        //Set email format to HTML
+        $mail->Subject = 'From Hotel De Luna ';
+        $mail->Body = "<span style=font-size:18px;letter-spacing:0.5px;color:black;>Good day <b>$last_name</b>!</span><br><span style=font-size:15px;letter-spacing:0.5px;color:black;>Your receipt is invalid. Please book a new one</span>";
+       
+    
+        $mail->send();
+        return true;
+    } catch (Exception $e) {
+        return false;
+    }
+    
+}
+
+echo NULL;
+ 
+
+
+?>
+
+
+<?php
+
+if(isset($_POST['delete'])){
+  $id = $_POST['delete_id'];
+  $email = $_POST['email'];
+  $last_name = $_POST['last_name'];
+  $account_id = $_POST['account_id'];
+  $users_id = $_POST['users_id'];
+  
+
+  $query_delete = "DELETE FROM transactions WHERE users_id='$users_id'";
+  $run_delete = mysqli_query($conn,$query_delete) && send_error($email, $last_name, $account_id);
+
+  if($run_delete){
+     echo '<script>swal({
+      title: "Customer Declined!",
+      text: "Status has been change!",
+      icon: "info",
+      }).then(function() {
+      // Redirect the user
+      window.location.href="pending.php";
+  });</script>';
+
+
+  }else{
+    echo "Error" . $conn->error;
+  }
+}
+
+?>
+
+
+
+
 <?php 
 if(isset($_GET['p']) && isset($_GET['id']) && isset($_GET['rid'])){
   $user_id = $_GET['id'];
