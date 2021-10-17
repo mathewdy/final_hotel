@@ -89,12 +89,12 @@ if(isset($_GET['b']) && isset($_GET['id'])){
     <input class="form-control" type="file" name="id_image" id="id_image"><br>
     <p class="lead text-muted mb-0">Check in</p>
     <span class="hstack">
-      <input class="form-control" type="date" name="check_in">
+      <input class="form-control" type="text" name="check_in" id="check_in">
       <input class="form-control" type="time" name="time_in"><br>
     </span>
     <p class="lead text-muted mb-0">Check out</p>
-    <span class="hstack">
-      <input class="form-control" type="date" name="check_out">
+    <span class="hstack mb-3">
+      <input class="form-control" type="text" name="check_out" id="check_out">
       <input class="form-control" type="time" name="time_out"><br><br>
     </span>
     <span class="d-flex justify-content-between">
@@ -159,11 +159,12 @@ if(isset($_GET['b']) && isset($_GET['id'])){
 
       </div>
       </div>
-      </div>
-      </div>
+      </div> 
       <div class="accordion-footer p-2 px-3 position-relative">
       <p class="lead m-0">Inclusions:</p>
       <p class="lead m-0"><?php echo $rows ['description']?></p>
+      </div>
+     
       </div>
       </div>
       </div>
@@ -173,6 +174,28 @@ if(isset($_GET['b']) && isset($_GET['id'])){
     ?>
 </div>
 
+<script>
+var check_in = $('#check_in');
+var check_out = $('#check_out');
+
+check_in.datepicker({
+    keyboardNavigation: false,
+    forceParse: false,
+    autoclose: true,
+    format: 'yyyy-mm-dd',
+    startDate: new Date()
+});
+check_out.datepicker({
+    keyboardNavigation: false,
+    forceParse: false,
+    format: 'yyyy-mm-dd',
+    autoclose: true,
+});
+check_in.on("changeDate", function(e) {
+    check_out.datepicker('setStartDate', e.date);
+    check_out.prop('disabled', false);
+});
+    </script>
 <?php
 include "./includes/footer.php";
 ?>
