@@ -91,9 +91,9 @@ if(isset($_POST['paypal'])){
 </body>
 
 <?php
-/*
+
 require_once __DIR__.'/vendor/autoload.php';
-SAKA KO NA TO LALAGYAN NG CLIENT ID
+
 $messagebird = new MessageBird\Client('ekh0GGx1wn6n2pGHn6MSovwdu');
 $message = new MessageBird\Objects\Message;
 $message->originator = '+639156915704';
@@ -102,11 +102,11 @@ $message->body = "Dear Mr/Mrs: $last_name, we would like you to inform your rese
 $response = $messagebird->messages->create($message);
 
 
-link ito!
+//link ito!
 
 //BAKA WALA NA LAMAN SANDBOX
 
-*/
+
 
 ?>
 
