@@ -32,7 +32,7 @@ if(isset($_GET['id']) && isset($_GET['uid']) && isset($_GET['g']) && isset($_GET
   $message = new MessageBird\Objects\Message;
   $message->originator = '+639156915704';
   $message->recipients = $mobile_number;
-  $message->body = "Dear Mr/Mrs: $last_name, we would like you to inform your reservation from ProCreations is from $check_in to $check_out. Please check your email to inbox/spam, thank you.";
+  $message->body = "Dear Mr/Mrs: $last_name, we would like you to inform your reservation from ProCreations is from $date_in $time_in to $date_out $time_out. Please check your email to inbox/spam, thank you.";
   $response = $messagebird->messages->create($message);
 
 
