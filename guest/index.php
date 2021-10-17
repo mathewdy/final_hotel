@@ -165,7 +165,7 @@ include "./includes/header.php";
                         <div class="card-header">Executive Room</div>
                         <div class="card-body">
                             <img src="./Photos/hotel_rooms/executive_room.png" alt=" " class="card-img ">
-                            <p class="card-text m-4">A classy bundle for sassy people like you uwu.</p>
+                            <p class="card-text m-4">A classy bundle that includes fancy services and other amenities.</p>
                             <span class="vstack gap-2">
                                     <a href="executive.php" class="btn btn-dark">Book now</a>
                                     <a class="btn btn-light" data-bs-toggle="modal" href="#templateModal3" role="button">More Details</a>
@@ -233,16 +233,16 @@ include "./includes/header.php";
 <section>
 <div class="container text-center">
                 <hr class="featurette-divider">
-                    <a class="btn btn-floating btn-lg text-dark m-1"  data-mdb-ripple-color="dark">
+                    <a class="btn btn-floating btn-lg text-dark m-1"  data-mdb-ripple-color="dark" style="cursor:text;">
                         <img src="./Photos/amenities/wifi.svg" alt=""> WIFI</a>
 
-                    <a class="btn btn-floating btn-lg text-dark m-1"  data-mdb-ripple-color="dark">
+                    <a class="btn btn-floating btn-lg text-dark m-1"  data-mdb-ripple-color="dark" style="cursor:text;">
                         <img src="./Photos/amenities/parking.svg" alt=""> Parking</a>
 
-                    <a class="btn btn-floating btn-lg text-dark m-1"  data-mdb-ripple-color="dark">
+                    <a class="btn btn-floating btn-lg text-dark m-1"  data-mdb-ripple-color="dark"style="cursor:text;">
                         <img src="./Photos/amenities/sanitizedrooms.png" width="20" height="20" alt=""> Sanitized Rooms</a>
 
-                    <a class="btn btn-floating btn-lg text-dark m-1"  data-mdb-ripple-color="dark">
+                    <a class="btn btn-floating btn-lg text-dark m-1"  data-mdb-ripple-color="dark"style="cursor:text;">
                         <img src="./Photos/amenities/operation.png" width="20" height="20" alt=""> 24-Hr Operation</a>
                     <hr class="featurette-divider">
         </div>
