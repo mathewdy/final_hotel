@@ -214,7 +214,6 @@ if(isset($_GET['b']) && isset($_GET['id'])){
     }
     ?>
 </div>
-
 <script>
 var check_in = $('#check_in');
 var check_out = $('#check_out');
@@ -287,7 +286,12 @@ if(isset($_POST['request_book'])){
   $allowed_extension = array('png' , 'jpeg', 'jpg' , 'PNG' , 'JPEG' , 'JPG');
   $filename = $id_image;
   $file_extension = pathinfo($filename , PATHINFO_EXTENSION);
-  
+
+   $check_dates = "SELECT * FROM transactions WHERE room_id = $room_id";
+   $query_dates = mysqli_query($conn, $check_dates);
+   $Rows = mysqli_fetch_array($query_dates);
+   $date_in = date('Y-m-d', strtotime($Rows['check_in']));
+   $date_out = date('Y-m-d', strtotime($Rows['check_out']));
    if(empty($_POST['first_name']) && empty($_POST['last_name']) && empty($_POST['email']) && empty($_POST['mobile_number'])
    && empty($_POST['guest']) && empty($_POST['id_type']) && empty ($_POST['id_number']) && empty($_POST['id_image'])
    && empty($_POST['check_in']) && empty($_POST['time_in']) && empty($_POST['check_out']) && empty($_POST['time_out'])){
@@ -299,7 +303,34 @@ if(isset($_POST['request_book'])){
         // Redirect the user
         window.location.href='book.php?b&id=$room_id';
         });</script>";
-    }else if(empty($_POST['first_name'])){
+   }else if($_POST['check_in'] == $date_in && $_POST['check_out'] == $date_out){
+    echo "<script>swal({
+      title: 'Oops invalid request!',
+      text: 'Date already taken',
+      icon: 'warning',
+      }).then(function() {
+      // Redirect the user
+      window.location.href='book.php?b&id=$room_id';
+      });</script>";
+   }else if($_POST['check_in'] == $date_in){
+    echo "<script>swal({
+      title: 'Oops invalid request!',
+      text: 'Date already taken',
+      icon: 'warning',
+      }).then(function() {
+      // Redirect the user
+      window.location.href='book.php?b&id=$room_id';
+      });</script>";
+   }else if($_POST['check_out'] == $date_out){
+    echo "<script>swal({
+      title: 'Oops invalid request!',
+      text: 'Date already taken',
+      icon: 'warning',
+      }).then(function() {
+      // Redirect the user
+      window.location.href='book.php?b&id=$room_id';
+      });</script>";
+   }else if(empty($_POST['first_name'])){
       echo "<script>swal({
         title: 'Oops invalid request!',
         text: 'Input your first name',
