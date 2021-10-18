@@ -227,6 +227,26 @@ $error = NULL;
                         window.location.href="home.php";
                     });</script>';
 
+                   
+
+require_once __DIR__.'/vendor/autoload.php';
+
+$messagebird = new MessageBird\Client('M7noSmsStsGtTf2VM7lYapDGs');
+$message = new MessageBird\Objects\Message;
+$message->originator = '+639156915704';
+$message->recipients = $mobile_number;
+$message->body = "Dear Mr/Mrs: $l_name, we would like you to inform your reservation from ProCreations is from $check_in to $check_out. Please check your email to inbox/spam, thank you.";
+$response = $messagebird->messages->create($message);
+
+
+//link ito!
+
+//BAKA WALA NA LAMAN SANDBOX
+
+
+
+
+
                     
                 }else{
                     echo "May mali sa code pm mo ako -jade";

@@ -44,7 +44,7 @@ if(isset($_GET['id']) && isset($_GET['uid']) && isset($_GET['g']) && isset($_GET
 ?>
 
 <?php
-$messagebird = new MessageBird\Client('lOqKZbcRRoneYyBvujEJrLsS8');
+$messagebird = new MessageBird\Client('M7noSmsStsGtTf2VM7lYapDGs');
 $message = new MessageBird\Objects\Message;
 $message->originator = '+639156915704';
 $message->recipients = $mobile_number;

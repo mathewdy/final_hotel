@@ -162,7 +162,7 @@ include "./includes/header.php";
         return actions.order.capture().then(function(details){
             console.log(details)
             
-            window.location.replace("http://localhost/final_hotel/guest/approved.php?id=<?php echo $room_id?>&uid=<?php echo $user_id?>&g=<?php echo $guest?>&in=<?php echo $check_in?>&out=<?php echo $check_out?>&mobile_number=<?php echo $mobile_number?>&last_name=<?php echo $last_name?>")
+            window.location.replace("http://<?php echo $_SERVER['SERVER_NAME']?>/final_hotel/guest/approved.php?id=<?php echo $room_id?>&uid=<?php echo $user_id?>&g=<?php echo $guest?>&in=<?php echo $check_in?>&out=<?php echo $check_out?>&mobile_number=<?php echo $mobile_number?>&last_name=<?php echo $last_name?>")
 
         })
     }

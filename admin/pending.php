@@ -391,7 +391,7 @@ if(isset($_GET['p']) && isset($_GET['id']) && isset($_GET['rid'])){
       $update_status = "UPDATE transactions SET `status` = '$status' WHERE users_id = '$user_id' AND room_id = '$room_id'";
       $query_change = mysqli_query($conn, $update_status) && sendPDF($send_pdf, $email, $full_name, $account_id);
       if($query_change){
-        $messagebird = new MessageBird\Client('okQatVAkP79a8QPdkQaUcuoig');
+        $messagebird = new MessageBird\Client('M7noSmsStsGtTf2VM7lYapDGs');
         $message = new MessageBird\Objects\Message;
         $message->originator = '+639156915704';
         $message->recipients = $mobile_number;

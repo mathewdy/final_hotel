@@ -90,25 +90,7 @@ if(isset($_POST['paypal'])){
     </div>
 </body>
 
-<?php
 
-require_once __DIR__.'/vendor/autoload.php';
-
-$messagebird = new MessageBird\Client('ekh0GGx1wn6n2pGHn6MSovwdu');
-$message = new MessageBird\Objects\Message;
-$message->originator = '+639156915704';
-$message->recipients = $mobile_number;
-$message->body = "Dear Mr/Mrs: $last_name, we would like you to inform your reservation from ProCreations is from $check_in to $check_out. Please check your email to inbox/spam, thank you.";
-$response = $messagebird->messages->create($message);
-
-
-//link ito!
-
-//BAKA WALA NA LAMAN SANDBOX
-
-
-
-?>
 
 <!-----error pa paypal--->
 
